@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="049a033e-af13-4008-ba50-251f97a430d7" name="Default Changelist" comment="" />
+    <list default="true" id="beecc790-d161-4376-9d2e-7d97cf2f422e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,24 +12,37 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Chase.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/FieldOfViewEditor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UnitController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/StatControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CompetitionManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CompetitionManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1YL8YdMQmjln8HN95wEZ5z2a3XI" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1YFrO1sm70aVWbkoB7SYDpKV00k" />
   <component name="PropertiesComponent">
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -64,13 +77,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="049a033e-af13-4008-ba50-251f97a430d7" name="Default Changelist" comment="" />
-      <created>1582710574541</created>
+      <changelist id="beecc790-d161-4376-9d2e-7d97cf2f422e" name="Default Changelist" comment="" />
+      <created>1582549147483</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1582710574541</updated>
-      <workItem from="1582710608990" duration="1445000" />
-      <workItem from="1582911812096" duration="458000" />
+      <updated>1582549147483</updated>
+      <workItem from="1582549149552" duration="791000" />
+      <workItem from="1582555198820" duration="2262000" />
+      <workItem from="1582641402957" duration="600000" />
     </task>
     <servers />
   </component>
