@@ -9,8 +9,6 @@
         <e p="Scripts" t="Include">
           <e p="BaseAI.cs" t="Include" />
           <e p="CompetitionManager.cs" t="Include" />
-          <e p="FieldOfView.cs" t="Include" />
-          <e p="FieldOfViewEditor.cs" t="Include" />
           <e p="HealthScript.cs" t="Include" />
           <e p="MaxAI.cs" t="Include" />
           <e p="StatControl.cs" t="Include" />
