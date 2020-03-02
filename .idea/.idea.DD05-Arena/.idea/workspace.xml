@@ -13,15 +13,19 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/PlayerScript.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StatControl.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CompetitionManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
       </list>
@@ -82,6 +86,8 @@
       <workItem from="1582710608990" duration="686000" />
       <workItem from="1582719691606" duration="2191000" />
       <workItem from="1583149305330" duration="521000" />
+      <workItem from="1583151246297" duration="4249000" />
+      <workItem from="1583168963521" duration="3815000" />
     </task>
     <servers />
   </component>

@@ -9,20 +9,25 @@ public class MaxAI : BaseAI
     public float defense;
     public float speed;
     public float damage;
-    
+    //public HealthScript CurHealth;
+
     //modes the AI can switch between, with values represented as percentages
     public Mode Defensive = new Mode(.6f,.2f,.2f);
     public Mode Offensive = new Mode(.2f,.2f,.6f);
     public Mode Retreat = new Mode(.2f,.6f,.2f);
 
     public HealthScript healthBar;
+    public HealthScript defBar;
+    public HealthScript speedBar;
+    public HealthScript damBar;
     void Start()
     {
         currentHealth = maxHealth;
-        if (healthBar != null)
-        {
-            healthBar.SetMaxHealth(maxHealth);
-        }
+//        if (healthBar != null)
+//        {
+//            healthBar.SetMaxHealth(maxHealth);
+//            
+//        }
     }
 
     // Update is called once per frame
@@ -55,6 +60,7 @@ public class MaxAI : BaseAI
         {
         Stats.SetHealth(currentHealth);
         Stats.SetNewMode(Defensive);
+        healthBar.StatBars(Defensive);//this will need to be called in each "mode" function unless a checker can be created
 
         defense = Stats.HP;
         speed = Stats.SPD;
@@ -75,6 +81,7 @@ public class MaxAI : BaseAI
         {
             Stats.SetHealth(currentHealth);
             Stats.SetNewMode(Offensive);
+            healthBar.StatBars(Offensive);
 
             currentHealth = Stats.R;
             defense = Stats.HP;
@@ -95,6 +102,7 @@ public class MaxAI : BaseAI
         {
             Stats.SetHealth(currentHealth);
             Stats.SetNewMode(Retreat);
+            healthBar.StatBars(Retreat);
 
             currentHealth = Stats.R;
             defense = Stats.HP;
@@ -108,15 +116,18 @@ public class MaxAI : BaseAI
 
     }
 
+   
+
 
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (healthBar != null)
-        {
+//        if (healthBar != null)
+//        {
             healthBar.SetHealth(currentHealth);
+            //CurHealth.fillPer = currentHealth / 100;
 
-        }
+        //}
     }
 }
 
