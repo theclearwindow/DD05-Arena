@@ -10,6 +10,8 @@ public class StatControl
     public float SPD { get; private set; }
     public float DMG { get; private set; }
 
+    
+
     //public HealthScript healthScript;
     
     
@@ -26,6 +28,8 @@ public class StatControl
         HP = R * newMode.HPercent;
         SPD = R * newMode.SPercent;
         DMG = R * newMode.DPercent;
+        
+        
 
         
         
