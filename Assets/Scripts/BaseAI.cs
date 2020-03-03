@@ -2,55 +2,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseAI : MonoBehaviour
+public class ScannedRobotEvent
 {
-    public UnitController Ship = null;
+    public string Name;
+    public float Distance;
+}
+
+public class BaseAI
+{
+    public UnitController Unit = null;
     public StatControl Stats = new StatControl();
 
+    public virtual void OnScannedRobot(ScannedRobotEvent e)
+    {
+        // 
+    }
+
     // actions the AI can call on and the values to apply to those actions:
-    
-//    public virtual void OnScannedRobot(ScannedRobotEvent e)
-//    {
-//        // 
-//    }
-//
-//    public IEnumerator Ahead(float distance) {
-//        yield return Ship.__Ahead(distance);
-//    }
-//
-//    public IEnumerator Back(float distance) {
-//        yield return Ship.__Back(distance);
-//    }
-//
-//    public IEnumerator TurnLookoutLeft(float angle) {
-//        yield return Ship.__TurnLookoutLeft(angle);
-//    }
-//
-//    public IEnumerator TurnLookoutRight(float angle) {
-//        yield return Ship.__TurnLookoutRight(angle);
-//    }
-//
-//    public IEnumerator TurnLeft(float angle) {
-//        yield return Ship.__TurnLeft(angle);
-//    }
-//
-//    public IEnumerator TurnRight(float angle) {
-//        yield return Ship.__TurnRight(angle);
-//    }
-//
-//    public IEnumerator FireFront(float power) {
-//        yield return Ship.__FireFront(power);
-//    }
-//
-//    public IEnumerator FireLeft(float power) {
-//        yield return Ship.__FireLeft(power);
-//    }
-//
-//    public IEnumerator FireRight(float power) {
-//        yield return Ship.__FireRight(power);
-//    }
-//
-//    public virtual IEnumerator RunAI() {
-//        yield return null;
-//    }
+    public IEnumerator Ahead(float distance)
+    {
+        yield return Unit.__Ahead(distance);
+    }
+
+    public IEnumerator Back(float distance)
+    {
+        yield return Unit.__Back(distance);
+    }
+
+    public IEnumerator TurnLeft(float angle)
+    {
+        yield return Unit.__TurnLeft(angle);
+    }
+
+    public IEnumerator TurnRight(float angle)
+    {
+        yield return Unit.__TurnRight(angle);
+    }
+
+    public IEnumerator FireFront(float power)
+    {
+        yield return Unit.__FireFront(power);
+    }
+
+    public virtual IEnumerator RunAI()
+    {
+        yield return null;
+    }
+
+    public virtual float GetHealth()
+    {
+        return Unit.__GetHealth();
+    }
 }
+
