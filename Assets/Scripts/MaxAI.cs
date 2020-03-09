@@ -65,7 +65,7 @@ public class MaxAI : BaseAI
 
     public override IEnumerator RunAI()
     {
-        Debug.Log("test");
+        Debug.Log("MaxAI RunAI started");
         while (true)
         {
             if (currentHealth < 50f)

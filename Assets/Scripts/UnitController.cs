@@ -22,27 +22,27 @@ public class UnitController : MonoBehaviour
             SetAI(new MaxAI());
             StartBattle();
         }
-        if (_AItype == AItype.Jorn)
+        else if (_AItype == AItype.Jorn)
         {
             SetAI(new CopyPasteAI());
             StartBattle();
         }
-        if (_AItype == AItype.Omar)
+        else if (_AItype == AItype.Omar)
         {
             SetAI(new MaxAI());
             StartBattle();
         }
-        if (_AItype == AItype.Michael)
+        else if (_AItype == AItype.Michael)
         {
             SetAI(new MaxAI());
             StartBattle();
         }
-        if (_AItype == AItype.Sofie)
+        else if (_AItype == AItype.Sofie)
         {
             SetAI(new MaxAI());
             StartBattle();
         }
-        if (_AItype == AItype.Theo)
+        else if (_AItype == AItype.Theo)
         {
             SetAI(new MaxAI());
             StartBattle();

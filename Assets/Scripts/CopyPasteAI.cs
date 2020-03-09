@@ -7,16 +7,16 @@ public class CopyPasteAI : BaseAI
 {
     public override IEnumerator RunAI()
     {
-        Debug.Log("test");
+        Debug.Log("CopyPasteAI RunAI started");
         while (true)
         {
             if (GetHealth() < 0.5f)
             {
-                yield return FireFront(1);
+                //yield return FireFront(1);
             }
             else
             {
-                yield return Ahead(2);
+                yield return Ahead(3);
                 yield return FireFront(1);
                 yield return TurnLeft(360);
                 yield return Back(4);
