@@ -7,16 +7,51 @@ public class UnitController : MonoBehaviour
     public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
     private BaseAI ai = null;
+    
 
     private float baseSpeed = 2.0f; // values may change, but these will be what all stats are based on
     private float rotationSpeed = 180.0f; // values may change, but these will be what all stats are based on
     private float mapSize = 500.0f;
 
+    public AItype _AItype;
+
     private void Start()
     {
-        // Debug code!!!
-        SetAI(new CopyPasteAI());
-        StartBattle();
+        if (_AItype == AItype.Max)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Jorn)
+        {
+            SetAI(new CopyPasteAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Omar)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Michael)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Sofie)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Theo)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else
+        {
+            SetAI(new CopyPasteAI());
+            StartBattle();
+        }
     }
 
     public void SetAI(BaseAI _ai)
