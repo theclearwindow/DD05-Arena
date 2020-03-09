@@ -34,7 +34,7 @@ public class HealthScript : MonoBehaviour
     public void SetHealth(float health)
     {
         //slider.value = playerScript.currentHealth;
-        hp.fillAmount = health * Time.deltaTime;
+        hp.fillAmount = health/100;
         Debug.Log(health);
 
 

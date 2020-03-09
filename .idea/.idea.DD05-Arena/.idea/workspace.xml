@@ -15,6 +15,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/PlayerScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" root0="FORCE_HIGHLIGHTING" />
@@ -26,8 +27,10 @@
       <list>
         <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
       </list>
     </option>
   </component>
@@ -88,6 +91,7 @@
       <workItem from="1583149305330" duration="521000" />
       <workItem from="1583151246297" duration="4249000" />
       <workItem from="1583168963521" duration="3815000" />
+      <workItem from="1583758251881" duration="1689000" />
     </task>
     <servers />
   </component>

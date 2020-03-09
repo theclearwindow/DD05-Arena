@@ -8,7 +8,7 @@ public class ScannedRobotEvent
     public float Distance;
 }
 
-public class BaseAI
+public class BaseAI : MonoBehaviour
 {
     public UnitController Unit = null;
     public StatControl Stats = new StatControl();
