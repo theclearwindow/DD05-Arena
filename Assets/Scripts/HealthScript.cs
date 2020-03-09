@@ -13,6 +13,7 @@ public class HealthScript : MonoBehaviour
     public Gradient gradient;
     public MaxAI playerScript;
     public GameObject player;
+
     public Image hp;
     public Image def;
     public Image spd;
@@ -21,7 +22,8 @@ public class HealthScript : MonoBehaviour
     //public GameObject player;
     private void Start()
     {
-        health = GetComponentInParent<MaxAI>().maxHealth;
+        health = playerScript.currentHealth;
+        
     }
 
 //    public void SetMaxHealth(float health)
@@ -31,11 +33,14 @@ public class HealthScript : MonoBehaviour
 //        
 //        
 //    }
-    public void SetHealth(float health)
+    public void SetHealth(float change)
     {
-        //slider.value = playerScript.currentHealth;
-        hp.fillAmount = health * Time.deltaTime;
-        Debug.Log(health);
+        health -= change;
+        
+        hp.fillAmount -= change/100;
+       // Debug.Log(health + "health");
+        
+        
 
 
 

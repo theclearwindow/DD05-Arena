@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScannedRobotEvent
-{
-    public string Name;
-    public float Distance;
-}
 
-public class BaseAI
+
+public class BaseAI : MonoBehaviour
 {
     public UnitController Unit = null;
     public StatControl Stats = new StatControl();
@@ -53,5 +49,10 @@ public class BaseAI
     {
         return Unit.__GetHealth();
     }
+    
 }
-
+public class ScannedRobotEvent
+{
+    public string Name;
+    public float Distance;
+}
