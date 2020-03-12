@@ -22,12 +22,14 @@ public class StatControl
         R = newHealth;
     }
 
-    public void SetNewMode(Mode newMode)
+ 
+
+    public void SetNewMode(float[] newMode)
     {
 
-        HP = R * newMode.HPercent;
-        SPD = R * newMode.SPercent;
-        DMG = R * newMode.DPercent;
+        HP = R * newMode[0];
+        SPD = R * newMode[1];
+        DMG = R * newMode[2];
         
         
 

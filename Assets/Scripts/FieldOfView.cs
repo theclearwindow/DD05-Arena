@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldOfView : MonoBehaviour
+public class FieldOfView : BaseAI
 {
     public GameObject[] others;
+    public CopyPasteAI otherAI;
+    public float[] otherHealth;
 
     [Range(0, 180)]
-    public float FOV = 0.5f;
+    public float FOV = 14.6f;
 
     [Range(0, 20)]
     public float visionRange = 10f;
@@ -16,6 +18,7 @@ public class FieldOfView : MonoBehaviour
     {
         //Find others
         others = GameObject.FindGameObjectsWithTag("Target");
+        
     }
 
     // Update is called once per frame
@@ -27,6 +30,7 @@ public class FieldOfView : MonoBehaviour
         {
             //If it finds itself in the array, skip.
             if (other == this.gameObject) continue;
+            
 
             Vector3 b = other.transform.position - this.transform.position;
             float angle = Vector3.SignedAngle(b, a, Vector3.up);
@@ -38,9 +42,9 @@ public class FieldOfView : MonoBehaviour
             if (Physics.Raycast(transform.position, b, out hit, visionRange) && Mathf.Abs(angle) < FOV && hit.transform.tag == "Target")
             {
                 //======Put what you want to happen if a target is in it's field of view here=======================
-
+                GetComponent<BaseAI>().GetStats();
                 //==================================================================================================
-                //Debug.Log("hit" + other.name);
+                Debug.Log("hit" + other.name);
                 Debug.DrawRay(transform.position, b * hit.distance, Color.red, 0.1f);
             }
         }

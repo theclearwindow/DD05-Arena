@@ -11,113 +11,120 @@ public class CopyPasteAI : BaseAI
     public float defense;
     public float speed;
     public float damage;
-    //public HealthScript CurHealth;
+    
 
-    //modes the AI can switch between, with values represented as percentages
-    public Mode Defensive = new Mode(.6f,.2f,.2f);
-    public Mode Offensive = new Mode(.2f,.2f,.6f);
-    public Mode Retreat = new Mode(.2f,.6f,.2f);
+    public bool on;
+    
+    //This 2D Array contains your different modes. 
+    private float[,] modes = new float[,]
+    {
+        /*offensive*/{.2f, .2f, .6f}, 
+        /*defensive*/{.6f,.2f,.2f}, 
+        /*Retreat*/{.2f,.6f,.2f}
+    };
 
+    public int newPos = 0;//new position in the array, counting down from the top.
+    public int nowPos = 0;//current position in the array, to keep the mode from updating every frame
+    public float[] set;//1D array containing the current mode values only.
+
+    
+
+    
     public HealthScript healthBar;
     public HealthScript defBar;
     public HealthScript speedBar;
     public HealthScript damBar;
     
      void Start()
-    {
+     {
+         on = true;//is AI on or alive -- possibly unnecessary
         currentHealth = maxHealth;
-//        if (healthBar != null)
-//        {
-//            healthBar.SetMaxHealth(maxHealth);
-//            
-//        }
-    }
+        
+        newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
+        
+        set = new float[]{modes[newPos,0],modes[newPos,1], modes[newPos,2]}; //set values for beginning mode
+
+     }
 
     // Update is called once per frame
     void Update()
     {
+        if (nowPos != newPos)//if mode has changed
+        {
+            set = new float[] {modes[newPos, 0], modes[newPos, 1], modes[newPos, 2]};//change current mode values
+        
+            
+            Stats.SetNewMode(set);//apply current mode values
+            healthBar.StatBars(set);//set statbar values
+
+            //apply current values to unit:
+            defense = Stats.HP;
+            speed = Stats.SPD;
+            damage = Stats.DMG;
+            Debug.Log("defense: " + defense);
+            Debug.Log("damage: " + damage);
+            Debug.Log("speed: " + speed);
+            nowPos = newPos;//update nowPos to stop program from crashing
+
+        }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            TakeDamage(20);
+            TakeDamage(20);//hurt me, daddy
         }
         
         if (Input.GetKeyDown(KeyCode.T))
         {
-            SetDefensive();
+            //SetDefensive();
         }
         
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            SetOffesive();
+            //SetOffesive();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.U))
         {
-            SetRetreat();
+            //SetRetreat();
         }
-    }
 
-    public void SetDefensive()
-    {
-        if (Stats != null)
+        if (on == true)//check if unit is alive
         {
-        Stats.SetHealth(currentHealth);
-        Stats.SetNewMode(Defensive);
-        healthBar.StatBars(Defensive);//this will need to be called in each "mode" function unless a checker can be created
 
-        defense = Stats.HP;
-        speed = Stats.SPD;
-        damage = Stats.DMG;
+            if (currentHealth / 100 < 0.5f)//check health
+            {
+
+                
+                newPos = 0; //change mode based on health
+                StartCoroutine(UnderHalf());
+            }
+
+            if (currentHealth / 100 < .3f)
+            {
+                newPos = 2;
+            }
+
+            
+        }
+
+
+       
         
-        Debug.Log("defense: " + defense);
-        Debug.Log("damage: " + damage);
-        Debug.Log("speed: " + speed);
+                
+            
+
+            if (currentHealth / 100 <= 0.0f)
+            {
+                on = false;
+                //die?
+            }
+
         
-    }
-    else {Debug.Log("Stats is null");}
+
+
+
 
     }
 
-    public void SetOffesive()
-    {
-        if (Stats != null)
-        {
-            Stats.SetHealth(currentHealth);
-            Stats.SetNewMode(Offensive);
-            healthBar.StatBars(Offensive);
-
-            currentHealth = Stats.R;
-            defense = Stats.HP;
-            speed = Stats.SPD;
-            damage = Stats.DMG;
-
-            Debug.Log("defense: " + defense);
-            Debug.Log("damage: " + damage);
-            Debug.Log("speed: " + speed);
-        }
-        else {Debug.Log("Stats is null");}
-
-    }
-
-    public void SetRetreat()
-    {
-        if (Stats != null)
-        {
-            Stats.SetHealth(currentHealth);
-            Stats.SetNewMode(Retreat);
-            healthBar.StatBars(Retreat);
-
-            currentHealth = Stats.R;
-            defense = Stats.HP;
-            speed = Stats.SPD;
-            damage = Stats.DMG;
-
-            Debug.Log("defense: " + defense);
-            Debug.Log("damage: " + damage);
-            Debug.Log("speed: " + speed);
-        } else {Debug.Log("FUCK");}
-
-    }
 
    
 
@@ -125,42 +132,40 @@ public class CopyPasteAI : BaseAI
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-//        if (healthBar != null)
-//        {
+
             healthBar.SetHealth(currentHealth);
-            //CurHealth.fillPer = currentHealth / 100;
-
-        //}
+          
     }
-}
+    
 
-/*
-    public override IEnumerator RunAI()
+   IEnumerator OverHalf()
     {
-        Debug.Log("CopyPasteAI RunAI started");
-        while (true)
+        
+        
+        if (currentHealth/100 > 0.5f)
         {
-            if (GetHealth() < 0.5f)
-            {
-                //yield return FireFront(1);
-            }
-            else
-            {
-                yield return Ahead(3);
-                yield return FireFront(1);
-                yield return TurnLeft(360);
-                yield return Back(4);
-                yield return TurnRight(90);
-            }
-            if (GetHealth() <= 0.0f)
-            {
-                break;
-            }
+            yield return FireFront(1);
+        }
+        else
+        {
+            
+        }
+        if (currentHealth/100 <= 0.0f)
+        {
+            Debug.Log("Dead");
         }
     }
 
-    public override void OnScannedRobot(ScannedRobotEvent e)
-    {
-        Debug.Log("Enemy detected: " + e.Name + " at distance: " + e.Distance);
+    IEnumerator UnderHalf()
+    {//what if no coroutines? just at first?
+        yield return Ahead(2);
+        yield return FireFront(1);
+        yield return TurnLeft(360);
+        yield return Back(4);
+        yield return TurnRight(90);
     }
-}*/
+    
+    
+    
+}
+

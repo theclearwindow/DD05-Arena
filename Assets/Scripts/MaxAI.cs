@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class MaxAI : BaseAI
 {
-    public float maxHealth = 100;
-    public float currentHealth = 100;
+    public float maxHealth = 100;//change to inherit from BaseAI
+    public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
-    public bool basic = true;
-
     //public HealthScript CurHealth;
 
     //modes the AI can switch between, with values represented as percentages
@@ -22,14 +20,14 @@ public class MaxAI : BaseAI
     public HealthScript defBar;
     public HealthScript speedBar;
     public HealthScript damBar;
-
-
-
-    private void Start()
+    void Start()
     {
-        Debug.Log(currentHealth + "health");
-        healthBar.SetHealth(maxHealth);
-        Debug.Log(currentHealth + "health");
+        currentHealth = maxHealth;
+//        if (healthBar != null)
+//        {
+//            healthBar.SetMaxHealth(maxHealth);
+//            
+//        }
     }
 
     // Update is called once per frame
@@ -37,58 +35,26 @@ public class MaxAI : BaseAI
     {
         if (Input.GetKeyDown(KeyCode.D))
         {
-            TakeDamage(10);
+            TakeDamage(20);
         }
         
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            SetDefensive();
+           // SetDefensive();
         }
         
         if (Input.GetKeyDown(KeyCode.W))
         {
-            SetOffesive();
+          //  SetOffesive();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            SetRetreat();
-        }
-
-        if (basic == true)
-        {
-            RunAI();
-        } else basic = false;
-
-
-    }
-
-    public override IEnumerator RunAI()
-    {
-        Debug.Log("MaxAI RunAI started");
-        while (true)
-        {
-            if (currentHealth < 50f)
-            {
-                yield return FireFront(1);
-                yield return TurnRight(90);
-            }
-            else
-            {
-                yield return Ahead(200);
-                yield return FireFront(66);
-                yield return TurnLeft(4);
-                yield return Back(45);
-                yield return TurnRight(90);
-            }
-            if (currentHealth <= 0.0f)
-            {
-                break;
-            }
+           // SetRetreat();
         }
     }
 
-    public void SetDefensive()
+    /*public void SetDefensive()
     {
         if (Stats != null)
         {
@@ -149,14 +115,13 @@ public class MaxAI : BaseAI
         } else {Debug.Log("FUCK");}
 
     }
-
+*/
    
 
 
     void TakeDamage(int damage)
     {
-        currentHealth = currentHealth - damage;
-        Debug.Log(damage + "damage");
+        currentHealth -= damage;
 //        if (healthBar != null)
 //        {
             healthBar.SetHealth(currentHealth);
