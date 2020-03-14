@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScannedRobotEvent
-{
-    public string Name;
-    public float Distance;
-}
+//public class ScannedRobotEvent
+//{
+//   public string Name;
+//    public float Distance;
+//}
 
 public class BaseAI : MonoBehaviour
 {
     public UnitController Unit = null;
     public StatControl Stats = new StatControl();
 
-    public virtual void OnScannedRobot(ScannedRobotEvent e)
-    {
-        // 
-    }
+    //public virtual void OnScannedRobot(ScannedRobotEvent e)
+    //{
+    // 
+    //}
 
     // actions the AI can call on and the values to apply to those actions:
     public IEnumerator Ahead(float distance)
@@ -47,6 +47,11 @@ public class BaseAI : MonoBehaviour
     public virtual IEnumerator RunAI()
     {
         yield return null;
+    }
+
+    public virtual IEnumerator FollowTarget(float duration)
+    {
+        yield return Unit.__FollowTarget(duration);
     }
 
     public virtual float GetStats()

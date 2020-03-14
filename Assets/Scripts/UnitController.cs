@@ -9,15 +9,53 @@ public class UnitController : MonoBehaviour
     public HealthScript healthScript;
     private BaseAI ai = null;
 
+    //AI navmesh stuff
+    public GameObject navTarget = null;
+    public UnityEngine.AI.NavMeshAgent agent;
+
     private float baseSpeed = 2.0f; // values may change, but these will be what all stats are based on
     private float rotationSpeed = 180.0f; // values may change, but these will be what all stats are based on
     private float mapSize = 500.0f;
 
+    public AItype _AItype;
+
     private void Start()
     {
-        // Debug code!!!
-        SetAI(new CopyPasteAI());
-        StartBattle();
+        if (_AItype == AItype.Max)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Jorn)
+        {
+            SetAI(new CopyPasteAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Omar)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Michael)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Sofie)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else if (_AItype == AItype.Theo)
+        {
+            SetAI(new MaxAI());
+            StartBattle();
+        }
+        else
+        {
+            SetAI(new CopyPasteAI());
+            StartBattle();
+        }
     }
 
     public void SetAI(BaseAI _ai)
@@ -97,12 +135,31 @@ public class UnitController : MonoBehaviour
         yield return new WaitForFixedUpdate();
     }
 
+    public IEnumerator __FollowTarget(float duration)
+    {
+        agent.destination = navTarget.transform.position;
+        agent.speed = baseSpeed;
+
+        int numFrames = (int)(duration / Time.fixedDeltaTime);
+        for (int f = 0; f < numFrames; f++)
+        {
+            yield return new WaitForFixedUpdate();
+        }
+
+        agent.speed = 0.0f;
+    }
+
+    public IEnumerator __StopFollowTarget(float duration)
+    {
+        agent.destination = navTarget.transform.position;
+        agent.speed = 0.0f;
+
+        yield return new WaitForFixedUpdate();
+    }
+
     public float __GetStats()//return all stats of the chosen player
     {
-        
         return healthScript.health;
-        
+
     }
-    
-    
 }

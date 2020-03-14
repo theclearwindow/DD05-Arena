@@ -4,147 +4,169 @@ using UnityEngine;
 
 public class MaxAI : BaseAI
 {
-    public float maxHealth = 100;//change to inherit from BaseAI
+    public float maxHealth = 100;
     public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
-    //public HealthScript CurHealth;
 
-    //modes the AI can switch between, with values represented as percentages
-    public Mode Defensive = new Mode(.6f,.2f,.2f);
-    public Mode Offensive = new Mode(.2f,.2f,.6f);
-    public Mode Retreat = new Mode(.2f,.6f,.2f);
+
+    public bool on;
+
+    //This 2D Array contains your different modes. 
+    private float[,] modes = new float[,]
+    {
+        /*offensive*/{.2f, .2f, .6f}, 
+        /*defensive*/{.6f,.2f,.2f}, 
+        /*Retreat*/{.2f,.6f,.2f}
+    };
+
+    public int newPos = 0;//new position in the array, counting down from the top.
+    public int nowPos = 0;//current position in the array, to keep the mode from updating every frame
+    public float[] set;//1D array containing the current mode values only.
+
+
+
 
     public HealthScript healthBar;
     public HealthScript defBar;
     public HealthScript speedBar;
     public HealthScript damBar;
+
     void Start()
     {
+        on = true;//is AI on or alive -- possibly unnecessary
         currentHealth = maxHealth;
-//        if (healthBar != null)
-//        {
-//            healthBar.SetMaxHealth(maxHealth);
-//            
-//        }
-    }
 
-    // Update is called once per frame
+        newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
+
+        set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
+
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (nowPos != newPos)//if mode has changed
         {
-            TakeDamage(20);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-           // SetDefensive();
-        }
-        
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-          //  SetOffesive();
-        }
+            set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] };//change current mode values
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-           // SetRetreat();
-        }
-    }
 
-    /*public void SetDefensive()
-    {
-        if (Stats != null)
-        {
-        Stats.SetHealth(currentHealth);
-        Stats.SetNewMode(Defensive);
-        healthBar.StatBars(Defensive);//this will need to be called in each "mode" function unless a checker can be created
+            Stats.SetNewMode(set);//apply current mode values
+            healthBar.StatBars(set);//set statbar values
 
-        defense = Stats.HP;
-        speed = Stats.SPD;
-        damage = Stats.DMG;
-        
-        Debug.Log("defense: " + defense);
-        Debug.Log("damage: " + damage);
-        Debug.Log("speed: " + speed);
-        
-    }
-    else {Debug.Log("Stats is null");}
-
-    }
-
-    public void SetOffesive()
-    {
-        if (Stats != null)
-        {
-            Stats.SetHealth(currentHealth);
-            Stats.SetNewMode(Offensive);
-            healthBar.StatBars(Offensive);
-
-            currentHealth = Stats.R;
+            //apply current values to unit:
             defense = Stats.HP;
             speed = Stats.SPD;
             damage = Stats.DMG;
-
             Debug.Log("defense: " + defense);
             Debug.Log("damage: " + damage);
             Debug.Log("speed: " + speed);
+            nowPos = newPos;//update nowPos to stop program from crashing
+
         }
-        else {Debug.Log("Stats is null");}
-
-    }
-
-    public void SetRetreat()
-    {
-        if (Stats != null)
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            Stats.SetHealth(currentHealth);
-            Stats.SetNewMode(Retreat);
-            healthBar.StatBars(Retreat);
+            TakeDamage(20);//hurt me, daddy
+        }
 
-            currentHealth = Stats.R;
-            defense = Stats.HP;
-            speed = Stats.SPD;
-            damage = Stats.DMG;
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            //SetDefensive();
+        }
 
-            Debug.Log("defense: " + defense);
-            Debug.Log("damage: " + damage);
-            Debug.Log("speed: " + speed);
-        } else {Debug.Log("FUCK");}
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            //SetOffesive();
+        }
 
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            //SetRetreat();
+        }
+
+        if (on == true)//check if unit is alive
+        {
+
+            if (currentHealth / 100 < 0.5f)//check health
+            {
+
+
+                newPos = 0; //change mode based on health
+                //StartCoroutine(UnderHalf());
+            }
+
+            if (currentHealth / 100 < .3f)
+            {
+                newPos = 2;
+            }
+
+
+        }
+
+        if (currentHealth / 100 <= 0.0f)
+        {
+            on = false;
+            //die?
+        }
     }
-*/
-   
-
 
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
-//        if (healthBar != null)
-//        {
-            healthBar.SetHealth(currentHealth);
-            //CurHealth.fillPer = currentHealth / 100;
 
-        //}
+        healthBar.SetHealth(currentHealth);
+
     }
-}
 
-public struct Mode
-{
-
-    public float HPercent;
-    public float SPercent;
-    public float DPercent;
-
-    public Mode(float HPercent, float SPercent, float DPercent)
+    /*
+    IEnumerator OverHalf()
     {
 
-        this.HPercent = HPercent;
-        this.SPercent = SPercent;
-        this.DPercent = DPercent;
 
+        if (currentHealth / 100 > 0.5f)
+        {
+            yield return FireFront(1);
+        }
+        else
+        {
+
+        }
+        if (currentHealth / 100 <= 0.0f)
+        {
+            Debug.Log("Dead");
+        }
     }
-    
+
+    IEnumerator UnderHalf()
+    {//what if no coroutines? just at first?
+        yield return Ahead(2);
+        yield return FireFront(1);
+        yield return TurnLeft(360);
+        yield return Back(4);
+        yield return TurnRight(90);
+    }
+    */
+
+
+    public override IEnumerator RunAI()
+    {
+        Debug.Log("CopyPasteAI RunAI started");
+        while (true)
+        {
+            if (GetStats() < 0.5f)
+            {
+                //yield return FireFront(1);
+                yield return FollowTarget(2);
+            }
+            else
+            {
+                yield return Ahead(4);
+                yield return FollowTarget(2);
+                yield return FireFront(1);
+                yield return TurnLeft(360);
+                yield return Back(4);
+                yield return TurnRight(90);
+            }
+        }
+    }
 }
+

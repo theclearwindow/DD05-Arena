@@ -5,16 +5,15 @@ using UnityEngine;
 
 public class CopyPasteAI : BaseAI
 {
-    
     public float maxHealth = 100;
     public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
-    
+
 
     public bool on;
-    
+
     //This 2D Array contains your different modes. 
     private float[,] modes = new float[,]
     {
@@ -27,33 +26,31 @@ public class CopyPasteAI : BaseAI
     public int nowPos = 0;//current position in the array, to keep the mode from updating every frame
     public float[] set;//1D array containing the current mode values only.
 
-    
 
-    
+
+
     public HealthScript healthBar;
     public HealthScript defBar;
     public HealthScript speedBar;
     public HealthScript damBar;
-    
-     void Start()
-     {
-         on = true;//is AI on or alive -- possibly unnecessary
+
+    void Start()
+    {
+        on = true;//is AI on or alive -- possibly unnecessary
         currentHealth = maxHealth;
-        
+
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
-        
-        set = new float[]{modes[newPos,0],modes[newPos,1], modes[newPos,2]}; //set values for beginning mode
 
-     }
+        set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
 
-    // Update is called once per frame
+    }
     void Update()
     {
         if (nowPos != newPos)//if mode has changed
         {
-            set = new float[] {modes[newPos, 0], modes[newPos, 1], modes[newPos, 2]};//change current mode values
-        
-            
+            set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] };//change current mode values
+
+
             Stats.SetNewMode(set);//apply current mode values
             healthBar.StatBars(set);//set statbar values
 
@@ -71,12 +68,12 @@ public class CopyPasteAI : BaseAI
         {
             TakeDamage(20);//hurt me, daddy
         }
-        
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             //SetDefensive();
         }
-        
+
         if (Input.GetKeyDown(KeyCode.Y))
         {
             //SetOffesive();
@@ -93,9 +90,9 @@ public class CopyPasteAI : BaseAI
             if (currentHealth / 100 < 0.5f)//check health
             {
 
-                
+
                 newPos = 0; //change mode based on health
-                StartCoroutine(UnderHalf());
+                //StartCoroutine(UnderHalf());
             }
 
             if (currentHealth / 100 < .3f)
@@ -103,54 +100,38 @@ public class CopyPasteAI : BaseAI
                 newPos = 2;
             }
 
-            
+
         }
 
-
-       
-        
-                
-            
-
-            if (currentHealth / 100 <= 0.0f)
-            {
-                on = false;
-                //die?
-            }
-
-        
-
-
-
-
+        if (currentHealth / 100 <= 0.0f)
+        {
+            on = false;
+            //die?
+        }
     }
-
-
-   
-
 
     void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
-            healthBar.SetHealth(currentHealth);
-          
-    }
-    
+        healthBar.SetHealth(currentHealth);
 
-   IEnumerator OverHalf()
+    }
+
+    /*
+    IEnumerator OverHalf()
     {
-        
-        
-        if (currentHealth/100 > 0.5f)
+
+
+        if (currentHealth / 100 > 0.5f)
         {
             yield return FireFront(1);
         }
         else
         {
-            
+
         }
-        if (currentHealth/100 <= 0.0f)
+        if (currentHealth / 100 <= 0.0f)
         {
             Debug.Log("Dead");
         }
@@ -164,8 +145,22 @@ public class CopyPasteAI : BaseAI
         yield return Back(4);
         yield return TurnRight(90);
     }
-    
-    
-    
-}
+    */
 
+
+    public override IEnumerator RunAI()
+    {
+        Debug.Log("CopyPasteAI RunAI started");
+        while (true)
+        {
+            {
+                yield return Ahead(10);
+                yield return FireFront(1);
+                yield return TurnLeft(360);
+                yield return Back(4);
+                yield return FollowTarget(2);
+                yield return TurnRight(90);
+            }
+        }
+    }
+}

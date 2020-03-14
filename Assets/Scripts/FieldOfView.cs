@@ -42,7 +42,9 @@ public class FieldOfView : BaseAI
             if (Physics.Raycast(transform.position, b, out hit, visionRange) && Mathf.Abs(angle) < FOV && hit.transform.tag == "Target")
             {
                 //======Put what you want to happen if a target is in it's field of view here=======================
-                GetComponent<BaseAI>().GetStats();
+
+                //GetComponent<BaseAI>().GetStats();
+
                 //==================================================================================================
                 Debug.Log("hit" + other.name);
                 Debug.DrawRay(transform.position, b * hit.distance, Color.red, 0.1f);
