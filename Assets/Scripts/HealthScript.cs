@@ -24,6 +24,13 @@ public class HealthScript : MonoBehaviour
         //health = GetComponentInParent<BaseAI>().GetHealth();//damage functions must first set health in healthscript
     }
 
+    private void update()
+    {
+        
+        
+        
+    }
+
 //    public void SetMaxHealth(float health)
 //    {
 //        slider.maxValue = health;
@@ -31,10 +38,12 @@ public class HealthScript : MonoBehaviour
 //        
 //        
 //    }
-    public void SetHealth(float health)
+    public void SetHealth(float newHealth)
     {
         //slider.value = playerScript.currentHealth;
-        hp.fillAmount = health/100;
+        hp.fillAmount = newHealth/100;
+        health = newHealth;
+        
         Debug.Log(health);
 
 

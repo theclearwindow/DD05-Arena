@@ -46,7 +46,7 @@ public class FieldOfView : BaseAI
                 //GetComponent<BaseAI>().GetStats();
 
                 //==================================================================================================
-                Debug.Log("hit" + other.name);
+                //Debug.Log("hit" + other.name);
                 Debug.DrawRay(transform.position, b * hit.distance, Color.red, 0.1f);
             }
         }

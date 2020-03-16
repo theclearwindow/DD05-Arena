@@ -7,6 +7,7 @@ public class UnitController : MonoBehaviour
     public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
     public HealthScript healthScript;
+    public StatControl Stats;
     private BaseAI ai = null;
 
     //AI navmesh stuff
@@ -70,7 +71,7 @@ public class UnitController : MonoBehaviour
     }
 
     //this is where the details of each individual command the AI can issue will be stored, for example:
-
+    
 
     // Forward
     public IEnumerator __Ahead(float distance)
@@ -156,10 +157,27 @@ public class UnitController : MonoBehaviour
 
         yield return new WaitForFixedUpdate();
     }
-
+//Max's recent enums etc.
+//===========================================================================
     public float __GetStats()//return all stats of the chosen player
     {
         return healthScript.health;
 
     }
+    public int __TakeDamage( int dmg,int currentHealth)
+    {
+        int answer = currentHealth - dmg;
+        
+        return answer;
+
+    }
+
+    public float __SetStats(float[] mode, int HP)
+    {
+        Stats.SetHealth(HP);
+        Stats.SetNewMode(mode);
+        return Stats.R;//returns health value
+
+    }
+    //=========================================================================
 }

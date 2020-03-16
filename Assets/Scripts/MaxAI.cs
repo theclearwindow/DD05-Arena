@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MaxAI : BaseAI
 {
-    public float maxHealth = 100;
-    public float currentHealth;
+    public int maxHealth = 100;
+    public int currentHealth;
     public float defense;
     public float speed;
     public float damage;
@@ -65,7 +65,10 @@ public class MaxAI : BaseAI
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            TakeDamage(20);//hurt me, daddy
+            //thia function is currently called by a button press, but it will be able to be called by bullets on collision
+            Damage(20);//hurt me, daddy
+            
+            //Stats.SetHealth(Damage(20));
         }
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -108,14 +111,22 @@ public class MaxAI : BaseAI
             //die?
         }
     }
-
-    void TakeDamage(int damage)
+    
+    //Max's recent enumerators, etc.
+    //========================================================================================
+//putting the damage enumerator in the player's AI itself. Good idea? Bad Idea? Does it work?
+    public IEnumerator Damage(int damage)
     {
-        currentHealth -= damage;
-
-        healthBar.SetHealth(currentHealth);
+        //=================================================================
+        //where does this returned value go? it needs to go to currentHealth
+        //=================================================================
+        yield return TakeDamage(damage, currentHealth);
+        Stats.SetHealth(currentHealth);
+        Debug.Log(currentHealth);
+        
 
     }
+    //=========================================================================================
 
     /*
     IEnumerator OverHalf()

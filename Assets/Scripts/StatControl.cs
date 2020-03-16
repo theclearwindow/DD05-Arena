@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatControl 
+public class StatControl : BaseAI
 {
     //private BaseAI ai = null;
     public float HP {  get; private set; }
@@ -14,10 +14,11 @@ public class StatControl
     
     
 //adjust total resource value and set it.
-    public void SetHealth(float newHealth)
+    public void SetHealth(int newHealth)
     {
         //set R as player current health
-        R = newHealth;
+        R = newHealth/100;
+        
     }
 
     public void SetNewMode(float[] newMode)

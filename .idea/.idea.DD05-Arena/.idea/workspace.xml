@@ -15,6 +15,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$USER_HOME$/OneDrive/Documents/Unity Proj/Teo's Helathscripts/PlayerScript.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UnitController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BulletBehavior.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" root0="FORCE_HIGHLIGHTING" />
@@ -25,12 +27,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BulletBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
       </list>
     </option>
   </component>
@@ -92,6 +96,8 @@
       <workItem from="1583151246297" duration="4249000" />
       <workItem from="1583168963521" duration="3815000" />
       <workItem from="1583758251881" duration="1689000" />
+      <workItem from="1584197332172" duration="4198000" />
+      <workItem from="1584344796628" duration="5280000" />
     </task>
     <servers />
   </component>

@@ -44,6 +44,12 @@ public class BaseAI : MonoBehaviour
         yield return Unit.__FireFront(power);
     }
 
+    public IEnumerator TakeDamage(int power, int currentHealth)
+    {
+
+        yield return Unit.__TakeDamage(power, currentHealth);
+    }
+
     public virtual IEnumerator RunAI()
     {
         yield return null;
@@ -53,10 +59,20 @@ public class BaseAI : MonoBehaviour
     {
         yield return Unit.__FollowTarget(duration);
     }
-
+//Max's recent enums etc.
+//====================================================================
+//there is no damage enum in BaseAI because I wasn't sure if it would be easier to change the individual AI health with a damage function on the script itself,
+//mostly because I don't yet understand how to use the returned values of the enums
     public virtual float GetStats()
     {
         return Unit.__GetStats();
     }
+
+    public virtual float SetStats(float[] mode, int HP)
+    {
+        return Unit.__SetStats(mode, HP);
+    }
+    
+    //=============================================================
 }
 

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class CopyPasteAI : BaseAI
 {
+    
+    //See MaxAI for most current work from Max
     public float maxHealth = 100;
     public float currentHealth;
     public float defense;
