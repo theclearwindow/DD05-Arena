@@ -8,8 +8,7 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
-    public float fillPer;
-    public float health = 100;
+   public float health = 100;
     public Gradient gradient;
     public BaseAI playerScript;
     public GameObject player;

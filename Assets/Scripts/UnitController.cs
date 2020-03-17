@@ -1,9 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitController : MonoBehaviour
 {
+    
+    public int maxHealth = 100;
+    public int currentHealth;
+    public float defense;
+    public float speed;
+    public float damage;
+
     public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
     public HealthScript healthScript;
@@ -70,6 +78,22 @@ public class UnitController : MonoBehaviour
         StartCoroutine(ai.RunAI());
     }
 
+
+    private void OnTriggerEnter(Collider pew)
+    {
+        
+        Debug.Log("collision detected");
+        if (pew.gameObject.tag == "Bullet")
+        {
+            
+            int pow = 10;
+            currentHealth -= pow;
+            healthScript.SetHealth(currentHealth);
+            Debug.Log("Collision object detected");
+            
+
+        }
+    }
     //this is where the details of each individual command the AI can issue will be stored, for example:
     
 
@@ -164,19 +188,24 @@ public class UnitController : MonoBehaviour
         return healthScript.health;
 
     }
-    public int __TakeDamage( int dmg,int currentHealth)
+    public IEnumerator __TakeDamage( int dmg)
     {
-        int answer = currentHealth - dmg;
+        currentHealth -= dmg;
+        healthScript.SetHealth(currentHealth);
         
-        return answer;
+
+        yield return currentHealth;
 
     }
 
-    public float __SetStats(float[] mode, int HP)
+    public IEnumerator __SetStats(float[] mode, int HP)
     {
-        Stats.SetHealth(HP);
-        Stats.SetNewMode(mode);
-        return Stats.R;//returns health value
+        defense = mode[0] * currentHealth / 100;
+        speed = mode[1] * currentHealth / 100;
+        damage = mode[2] * currentHealth / 100;
+        healthScript.SetHealth(HP);
+        healthScript.StatBars(mode);
+        yield return ai.RunAI();
 
     }
     //=========================================================================

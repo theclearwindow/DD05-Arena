@@ -11,7 +11,7 @@ using UnityEngine;
 public class BaseAI : MonoBehaviour
 {
     public UnitController Unit = null;
-    public StatControl Stats = new StatControl();
+    //public StatControl Stats = new StatControl();
 
     //public virtual void OnScannedRobot(ScannedRobotEvent e)
     //{
@@ -44,10 +44,10 @@ public class BaseAI : MonoBehaviour
         yield return Unit.__FireFront(power);
     }
 
-    public IEnumerator TakeDamage(int power, int currentHealth)
+    public IEnumerator TakeDamage(int power)
     {
 
-        yield return Unit.__TakeDamage(power, currentHealth);
+        yield return Unit.__TakeDamage(power);
     }
 
     public virtual IEnumerator RunAI()
@@ -67,10 +67,21 @@ public class BaseAI : MonoBehaviour
     {
         return Unit.__GetStats();
     }
-
-    public virtual float SetStats(float[] mode, int HP)
+    
+    public IEnumerator Damage(int damage, int life)
     {
-        return Unit.__SetStats(mode, HP);
+        //=================================================================
+        //where does this returned value go? it needs to go to currentHealth
+        //=================================================================
+        yield return TakeDamage(damage);
+        
+        
+
+    }
+
+    public IEnumerator SetStats(float[] mode, int hp)
+    {
+        return Unit.__SetStats(mode, hp);
     }
     
     //=============================================================

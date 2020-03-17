@@ -8,7 +8,7 @@ public class BulletBehavior : BaseAI
     public int power;
     private void OnTriggerEnter()
     {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
         //Debug.Log("Hit");
         
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MaxAI : BaseAI
 {
-    public int maxHealth = 100;
+    //public int maxHealth = 100;
     public int currentHealth;
     public float defense;
     public float speed;
@@ -36,7 +36,7 @@ public class MaxAI : BaseAI
     void Start()
     {
         on = true;//is AI on or alive -- possibly unnecessary
-        currentHealth = maxHealth;
+        currentHealth = 100;
 
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
 
@@ -45,28 +45,29 @@ public class MaxAI : BaseAI
     }
     void Update()
     {
+        currentHealth = Unit.currentHealth;
         if (nowPos != newPos)//if mode has changed
         {
             set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] };//change current mode values
 
 
-            Stats.SetNewMode(set);//apply current mode values
+           // Stats.SetNewMode(set);//apply current mode values
             healthBar.StatBars(set);//set statbar values
 
             //apply current values to unit:
-            defense = Stats.HP;
+           /* defense = Stats.HP;
             speed = Stats.SPD;
             damage = Stats.DMG;
             Debug.Log("defense: " + defense);
             Debug.Log("damage: " + damage);
             Debug.Log("speed: " + speed);
             nowPos = newPos;//update nowPos to stop program from crashing
-
+*/
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
             //thia function is currently called by a button press, but it will be able to be called by bullets on collision
-            Damage(20);//hurt me, daddy
+           
             
             //Stats.SetHealth(Damage(20));
         }
@@ -115,17 +116,7 @@ public class MaxAI : BaseAI
     //Max's recent enumerators, etc.
     //========================================================================================
 //putting the damage enumerator in the player's AI itself. Good idea? Bad Idea? Does it work?
-    public IEnumerator Damage(int damage)
-    {
-        //=================================================================
-        //where does this returned value go? it needs to go to currentHealth
-        //=================================================================
-        yield return TakeDamage(damage, currentHealth);
-        Stats.SetHealth(currentHealth);
-        Debug.Log(currentHealth);
-        
-
-    }
+    
     //=========================================================================================
 
     /*
