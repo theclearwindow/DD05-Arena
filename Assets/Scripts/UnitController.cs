@@ -17,6 +17,20 @@ public class UnitController : MonoBehaviour
     public HealthScript healthScript;
     public StatControl Stats;
     private BaseAI ai = null;
+    //=============Field of View=============
+    private GameObject seenTarget = null;
+    //private bool scan = true;
+    //==========Shooting stuff===============
+    public GameObject Projectile_Emitter;
+    public GameObject Projectile_Default;
+
+    public float Projectile_Forward_Force = 600;
+    public float fireRateDefault = 0.5f;
+
+    private float timer;
+    private bool shotFired = false;
+    private bool weaponDefault = true;
+    //==========================================
 
     //AI navmesh stuff
     public GameObject navTarget = null;
@@ -42,7 +56,7 @@ public class UnitController : MonoBehaviour
         }
         else if (_AItype == AItype.Omar)
         {
-            SetAI(new MaxAI());
+            SetAI(new CopyPasteAI());
             StartBattle();
         }
         else if (_AItype == AItype.Michael)
@@ -65,8 +79,19 @@ public class UnitController : MonoBehaviour
             SetAI(new CopyPasteAI());
             StartBattle();
         }
+        //seenTarget = GetComponent<FieldOfView>().theTarget;
+        //Debug.Log(seenTarget);
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime; //Timer counting up for shooting.
+
+        //Updating every step what it's target is.
+        seenTarget = GetComponent<FieldOfView>().theTarget;
+        navTarget = seenTarget;
+        //Debug.Log(seenTarget);
+    }
     public void SetAI(BaseAI _ai)
     {
         ai = _ai;
@@ -79,11 +104,11 @@ public class UnitController : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider pew)
+    private void OnTriggerEnter(Collider other)
     {
         
         Debug.Log("collision detected");
-        if (pew.gameObject.tag == "Bullet")
+        if (other.gameObject.tag == "Bullet")
         {
             
             int pow = 10;
@@ -149,35 +174,94 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public IEnumerator __DoNothing()
+    public IEnumerator __DoNothing(float duration)
     {
-        yield return new WaitForFixedUpdate();
-    }
-
-    public IEnumerator __FireFront(float power)
-    {
-        GameObject newInstance = Instantiate(BulletPrefab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
-        yield return new WaitForFixedUpdate();
-    }
-
-    public IEnumerator __FollowTarget(float duration)
-    {
-        agent.destination = navTarget.transform.position;
-        agent.speed = baseSpeed;
-
         int numFrames = (int)(duration / Time.fixedDeltaTime);
         for (int f = 0; f < numFrames; f++)
         {
             yield return new WaitForFixedUpdate();
         }
+    }
 
-        agent.speed = 0.0f;
+    public IEnumerator __FireFront(float power)
+    {
+
+        if (weaponDefault == true)
+        {
+            if (timer > fireRateDefault)
+            {
+                Debug.Log("Shoot");
+                if (shotFired == false)
+                {
+
+                    GameObject Projectile_Handler;
+
+                    Projectile_Handler = Instantiate(Projectile_Default, Projectile_Emitter.transform.position, Projectile_Emitter.transform.rotation) as GameObject;
+                    Projectile_Handler.transform.Rotate(Vector3.left * 90);
+
+                    Rigidbody Projectile_RigidBody;
+                    Projectile_RigidBody = Projectile_Handler.GetComponent<Rigidbody>();
+
+                    Projectile_RigidBody.AddForce(transform.forward * Projectile_Forward_Force);
+
+                    shotFired = true;
+                    timer = 0;
+                    shotFired = false;
+
+                    //weaponDefault = false;
+
+                    Destroy(Projectile_Handler, 3.0f);
+                }
+            }
+        }
+        yield return new WaitForFixedUpdate();
+    }
+
+    public IEnumerator __FollowTarget(float duration)
+    {
+        if (navTarget != null)
+        {
+            agent.destination = navTarget.transform.position;
+            agent.speed = baseSpeed;
+
+            int numFrames = (int)(duration / Time.fixedDeltaTime);
+            for (int f = 0; f < numFrames; f++)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+            agent.speed = 0.0f;
+        }
+        else
+        {
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    public IEnumerator __LookAtTarget(float duration)//Works the same as Followtarget for now, trying to figure out how to only rotate it, harder than it looks, can't simple set the speed to 0 or something.
+    {
+        if (navTarget != null)
+        {
+            agent.destination = navTarget.transform.position;
+            agent.speed = baseSpeed;
+
+            int numFrames = (int)(duration / Time.fixedDeltaTime);
+            for (int f = 0; f < numFrames; f++)
+            {
+                yield return new WaitForFixedUpdate();
+            }
+            agent.speed = 0.0f;
+        }
+        else
+        {
+            yield return new WaitForFixedUpdate();
+        }
     }
 
     public IEnumerator __StopFollowTarget(float duration)
     {
         agent.destination = navTarget.transform.position;
         agent.speed = 0.0f;
+        navTarget = null;
 
         yield return new WaitForFixedUpdate();
     }
@@ -205,7 +289,8 @@ public class UnitController : MonoBehaviour
         damage = mode[2] * currentHealth / 100;
         healthScript.SetHealth(HP);
         healthScript.StatBars(mode);
-        yield return ai.RunAI();
+        //yield return ai.RunAI();     <<<<<<<this makes the code run from the start again.
+        yield return new WaitForFixedUpdate();
 
     }
     //=========================================================================

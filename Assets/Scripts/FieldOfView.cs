@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldOfView : BaseAI
+public class FieldOfView : MonoBehaviour
 {
     public GameObject[] others;
-    public CopyPasteAI otherAI;
+    //public CopyPasteAI otherAI;???
     public float[] otherHealth;
+    public GameObject theTarget;
 
     [Range(0, 180)]
     public float FOV = 14.6f;
@@ -18,7 +19,6 @@ public class FieldOfView : BaseAI
     {
         //Find others
         others = GameObject.FindGameObjectsWithTag("Target");
-        
     }
 
     // Update is called once per frame
@@ -44,12 +44,17 @@ public class FieldOfView : BaseAI
                 //======Put what you want to happen if a target is in it's field of view here=======================
 
                 //GetComponent<BaseAI>().GetStats();
-
+                //Debug.Log("hit" + other.name);
+                theTarget = other;
                 //==================================================================================================
                 //Debug.Log("hit" + other.name);
                 Debug.DrawRay(transform.position, b * hit.distance, Color.red, 0.1f);
             }
-        }
+            else
+            {
+                theTarget = null;
+            }
+        } 
     }
 
     //Just a calculation thing for the visual stuff

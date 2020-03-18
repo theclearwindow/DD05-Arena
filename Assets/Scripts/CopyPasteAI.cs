@@ -53,6 +53,7 @@ public class CopyPasteAI : BaseAI
 
     void Update()
     {
+
         currentHealth = Unit.currentHealth;
         /*
                 if (nowPos != newPos)//if mode has changed
@@ -164,15 +165,31 @@ public class CopyPasteAI : BaseAI
         while (true)
         {
             {
-                yield return Ahead(10);
-                yield return SetStats(offensive, currentHealth);
+
+                //Scouting
+                yield return DoNothing(1);
+                yield return Ahead(2);
+                yield return LookAtTarget(10);
+                yield return FollowTarget(2);
+                yield return TurnRight(90);
+
+
+                /*
+                yield return FireFront(3);
                 yield return FireFront(1);
+                */
+                /*
+                yield return Ahead(2);
+                yield return FireFront(10);
+                yield return SetStats(offensive, currentHealth);
+                //yield return FireFront(1);
                 yield return SetStats(defensive, currentHealth);
                 yield return TurnLeft(360);
                 yield return SetStats(retreat, currentHealth);
                 yield return Back(4);
-                yield return FollowTarget(2);
+                //yield return FollowTarget(2);
                 yield return TurnRight(90);
+                */
             }
         }
     }

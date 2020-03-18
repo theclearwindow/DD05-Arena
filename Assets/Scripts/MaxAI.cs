@@ -151,21 +151,22 @@ public class MaxAI : BaseAI
 
     public override IEnumerator RunAI()
     {
-        Debug.Log("CopyPasteAI RunAI started");
+        Debug.Log("MaxAI RunAI started");
         while (true)
         {
             if (GetStats() < 0.5f)
             {
+                yield return Ahead(8);
+                //yield return FollowTarget(1);
+                yield return TurnLeft(160);
+                yield return Ahead(8);
                 //yield return FireFront(1);
-                yield return FollowTarget(2);
+                yield return TurnLeft(360);
+                yield return Back(8);
+                yield return TurnRight(90);
             }
             else
             {
-                yield return Ahead(4);
-                yield return FollowTarget(2);
-                yield return FireFront(1);
-                yield return TurnLeft(360);
-                yield return Back(4);
                 yield return TurnRight(90);
             }
         }

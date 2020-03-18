@@ -11,6 +11,9 @@ using UnityEngine;
 public class BaseAI : MonoBehaviour
 {
     public UnitController Unit = null;
+
+
+
     //public StatControl Stats = new StatControl();
 
     //public virtual void OnScannedRobot(ScannedRobotEvent e)
@@ -39,6 +42,11 @@ public class BaseAI : MonoBehaviour
         yield return Unit.__TurnRight(angle);
     }
 
+    public IEnumerator DoNothing(float duration)
+    {
+        yield return Unit.__DoNothing(duration);
+    }
+
     public IEnumerator FireFront(float power)
     {
         yield return Unit.__FireFront(power);
@@ -59,10 +67,20 @@ public class BaseAI : MonoBehaviour
     {
         yield return Unit.__FollowTarget(duration);
     }
-//Max's recent enums etc.
-//====================================================================
-//there is no damage enum in BaseAI because I wasn't sure if it would be easier to change the individual AI health with a damage function on the script itself,
-//mostly because I don't yet understand how to use the returned values of the enums
+    
+    public virtual IEnumerator LookAtTarget(float duration)
+    {
+        yield return Unit.__LookAtTarget(duration);
+    }
+
+    public virtual IEnumerator StopFollowTarget(float duration)
+    {
+        yield return Unit.__StopFollowTarget(duration);
+    }
+    //Max's recent enums etc.
+    //====================================================================
+    //there is no damage enum in BaseAI because I wasn't sure if it would be easier to change the individual AI health with a damage function on the script itself,
+    //mostly because I don't yet understand how to use the returned values of the enums
     public virtual float GetStats()
     {
         return Unit.__GetStats();
