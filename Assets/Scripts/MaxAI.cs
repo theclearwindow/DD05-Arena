@@ -5,7 +5,7 @@ using UnityEngine;
 public class MaxAI : BaseAI
 {
     //public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
@@ -156,14 +156,16 @@ public class MaxAI : BaseAI
         {
             if (GetStats() < 0.5f)
             {
-                yield return Ahead(8);
+                //yield return Ahead(8);
                 //yield return FollowTarget(1);
-                yield return TurnLeft(160);
+                //yield return TurnLeft(160);
                 yield return Ahead(8);
+                yield return FireFront();
                 //yield return FireFront(1);
-                yield return TurnLeft(360);
+               // yield return TurnLeft(360);
                 yield return Back(8);
-                yield return TurnRight(90);
+                yield return FireFront();
+                //yield return TurnRight(90);
             }
             else
             {

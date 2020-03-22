@@ -47,9 +47,9 @@ public class BaseAI : MonoBehaviour
         yield return Unit.__DoNothing(duration);
     }
 
-    public IEnumerator FireFront(float power)
+    public IEnumerator FireFront()
     {
-        yield return Unit.__FireFront(power);
+        yield return Unit.__FireFront();
     }
 
     public IEnumerator TakeDamage(int power)

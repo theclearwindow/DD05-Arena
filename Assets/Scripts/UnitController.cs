@@ -7,7 +7,7 @@ public class UnitController : MonoBehaviour
 {
     
     public int maxHealth = 100;
-    public int currentHealth;
+    public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
@@ -103,22 +103,35 @@ public class UnitController : MonoBehaviour
         StartCoroutine(ai.RunAI());
     }
 
+    
+    //bullet collision function
+    //===========================================================================
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
+
+        Debug.Log("collision detected with " + other.gameObject.name + ", Tag: " + other.gameObject.tag);
         
-        Debug.Log("collision detected");
         if (other.gameObject.tag == "Bullet")
         {
-            
-            int pow = 10;
-            currentHealth -= pow;
-            healthScript.SetHealth(currentHealth);
-            Debug.Log("Collision object detected");
-            
+
+            GameObject bul = other.gameObject;
+            float mod = bul.GetComponent<BulletBehavior>().power;
+
+            if (mod > defense)
+            {
+                float pow = (defense * 10) - mod;
+
+                currentHealth -= pow;
+                healthScript.SetHealth(currentHealth);
+                Debug.Log("got shoosted");
+
+            }
+
 
         }
     }
+    //================================================================================
     //this is where the details of each individual command the AI can issue will be stored, for example:
     
 
@@ -183,7 +196,7 @@ public class UnitController : MonoBehaviour
         }
     }
 
-    public IEnumerator __FireFront(float power)
+    public IEnumerator __FireFront()
     {
 
         if (weaponDefault == true)
@@ -205,6 +218,7 @@ public class UnitController : MonoBehaviour
                     Projectile_RigidBody.AddForce(transform.forward * Projectile_Forward_Force);
 
                     shotFired = true;
+                    float shotPower = damage * 10;//this is the bullet damage, needs to be read by TakeDamage
                     timer = 0;
                     shotFired = false;
 
@@ -272,7 +286,7 @@ public class UnitController : MonoBehaviour
         return healthScript.health;
 
     }
-    public IEnumerator __TakeDamage( int dmg)
+    public IEnumerator __TakeDamage( float dmg)
     {
         currentHealth -= dmg;
         healthScript.SetHealth(currentHealth);
@@ -289,7 +303,7 @@ public class UnitController : MonoBehaviour
         damage = mode[2] * currentHealth / 100;
         healthScript.SetHealth(HP);
         healthScript.StatBars(mode);
-        //yield return ai.RunAI();     <<<<<<<this makes the code run from the start again.
+        yield return ai.RunAI();    // <<<<<<<this makes the code run from the start again.
         yield return new WaitForFixedUpdate();
 
     }

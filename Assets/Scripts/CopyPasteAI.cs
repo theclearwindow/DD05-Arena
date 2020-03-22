@@ -8,7 +8,7 @@ public class CopyPasteAI : BaseAI
     
     //See MaxAI for most current work from Max
     
-    public int currentHealth;
+    public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
@@ -47,7 +47,7 @@ public class CopyPasteAI : BaseAI
 
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
 
-        set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
+        //set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
 
     }
 
@@ -170,6 +170,7 @@ public class CopyPasteAI : BaseAI
                 yield return DoNothing(1);
                 yield return Ahead(2);
                 yield return LookAtTarget(10);
+                yield return FireFront();//set power in UnitController
                 yield return FollowTarget(2);
                 yield return TurnRight(90);
 
