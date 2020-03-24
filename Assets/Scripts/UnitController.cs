@@ -23,6 +23,7 @@ public class UnitController : MonoBehaviour
     //==========Shooting stuff===============
     public GameObject Projectile_Emitter;
     public GameObject Projectile_Prefab;
+    public GameObject MySelf;
 
     public float Projectile_Forward_Force = 600;
     public float fireRateDefault = 0.5f;
@@ -79,20 +80,27 @@ public class UnitController : MonoBehaviour
             SetAI(new CopyPasteAI());
             StartBattle();
         }
+
+        currentHealth = 100;
         //seenTarget = GetComponent<FieldOfView>().theTarget;
         //Debug.Log(seenTarget);
     }
 
     private void Update()
     {
-        timer += Time.deltaTime; //Timer counting up for shooting.
+        if (currentHealth > 0)
+        {
 
-        //Updating every step what it's target is.
-        seenTarget = GetComponent<FieldOfView>().theTarget;
-        navTarget = seenTarget;
-        //Debug.Log(seenTarget);
 
-        Debug.DrawRay(transform.position, transform.forward, Color.green, 1.0f);
+            timer += Time.deltaTime; //Timer counting up for shooting.
+
+            //Updating every step what it's target is.
+            seenTarget = GetComponent<FieldOfView>().theTarget;
+            navTarget = seenTarget;
+            //Debug.Log(seenTarget);
+
+            Debug.DrawRay(transform.position, transform.forward, Color.green, 1.0f);
+        }
     }
     public void SetAI(BaseAI _ai)
     {
@@ -102,7 +110,12 @@ public class UnitController : MonoBehaviour
 
     public void StartBattle()
     {
-        StartCoroutine(ai.RunAI());
+        //if (currentHealth > 0)
+        //{
+
+            StartCoroutine(ai.RunAI());
+            
+       // }
     }
 
     
@@ -111,6 +124,7 @@ public class UnitController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        float pow = 0;
 
         //Debug.Log("collision detected with " + other.gameObject.name + ", Tag: " + other.gameObject.tag);
         
@@ -118,14 +132,15 @@ public class UnitController : MonoBehaviour
         {
             GameObject bul = other.gameObject;
             float mod = bul.GetComponent<BulletBehavior>().power;
-            Debug.Log(mod);
+            
 
             if (mod > defense)
             {
-                float pow = (defense * 10) - mod;
-
+                pow = mod - (defense * 10);
+                Debug.Log("pow: " + pow);
+                Debug.Log("currentHealth: " + currentHealth);
                 currentHealth -= pow;
-                healthScript.SetHealth(currentHealth);
+                healthScript.SetHealth(currentHealth/100, MySelf);
                 //Debug.Log("got shoosted");
 
             }
@@ -293,19 +308,19 @@ public class UnitController : MonoBehaviour
     public IEnumerator __TakeDamage( float dmg)
     {
         currentHealth -= dmg;
-        healthScript.SetHealth(currentHealth);
+        healthScript.SetHealth(currentHealth, MySelf);
         
 
         yield return currentHealth;
 
     }
 
-    public IEnumerator __SetStats(float[] mode, int HP)
+    public IEnumerator __SetStats(float[] mode, float HP)
     {
-        defense = mode[0] * currentHealth / 100;
-        speed = mode[1] * currentHealth / 100;
-        damage = mode[2] * currentHealth / 100;
-        healthScript.SetHealth(HP);
+        defense = mode[0] * HP;
+        speed = mode[1] * HP;
+        damage = mode[2] * HP;
+        //healthScript.SetHealth(HP);
         healthScript.StatBars(mode);
         yield return ai.RunAI();    // <<<<<<<this makes the code run from the start again.
         yield return new WaitForFixedUpdate();

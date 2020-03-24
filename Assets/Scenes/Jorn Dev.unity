@@ -180,6 +180,7 @@ MonoBehaviour:
   Projectile_Emitter: {fileID: 1003619189}
   Projectile_Prefab: {fileID: 7325534405173767373, guid: 6ce0724a28d74044a9b0eea59c925355,
     type: 3}
+  MySelf: {fileID: 774435726}
   Projectile_Forward_Force: 600
   fireRateDefault: 0.5
   navTarget: {fileID: 0}
@@ -676,6 +677,11 @@ PrefabInstance:
       propertyPath: FOV
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3666197943378854483, guid: 360ae311ce67bb04ea0608f7136c7845,
+        type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3666197943140896677, guid: 360ae311ce67bb04ea0608f7136c7845, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 360ae311ce67bb04ea0608f7136c7845, type: 3}
@@ -712,6 +718,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7325534405173767373, guid: 6ce0724a28d74044a9b0eea59c925355,
         type: 3}
+    - target: {fileID: 3352926616738295134, guid: b0b8f7287f339334fb2e9327c0b099b8,
+        type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3352926617512992930, guid: b0b8f7287f339334fb2e9327c0b099b8,
         type: 3}
       propertyPath: m_Enabled

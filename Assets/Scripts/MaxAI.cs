@@ -37,6 +37,7 @@ public class MaxAI : BaseAI
     {
         on = true;//is AI on or alive -- possibly unnecessary
         currentHealth = 100;
+        //healthBar.SetHealth(currentHealth);
 
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
 
@@ -151,7 +152,7 @@ public class MaxAI : BaseAI
 
     public override IEnumerator RunAI()
     {
-        Debug.Log("MaxAI RunAI started");
+       // Debug.Log("MaxAI RunAI started");
         while (true)
         {
             if (GetStats() < 0.5f)

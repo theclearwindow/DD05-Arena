@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour
 {
-   public float health = 100;
+   public float health = 1;
     public Gradient gradient;
     public BaseAI playerScript;
     public GameObject player;
@@ -37,15 +37,20 @@ public class HealthScript : MonoBehaviour
 //        
 //        
 //    }
-    public void SetHealth(float newHealth)
+    public void SetHealth(float newHealth, GameObject thisGuy)
     {
         //slider.value = playerScript.currentHealth;
-        hp.fillAmount = newHealth/100;
-        health = newHealth;
-        
-        Debug.Log(health);
+        if (newHealth > 0)
+        {
+            hp.fillAmount = health;
+            health = newHealth;
 
+          
 
+        } else Destroy(thisGuy);
+
+        Debug.Log("Health: " + health);
+       // Debug.Log("fill amount: " + hp.fillAmount);
 
     }
 

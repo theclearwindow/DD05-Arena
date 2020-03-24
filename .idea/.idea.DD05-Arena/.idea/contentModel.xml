@@ -23,6 +23,7 @@
           <e p="Chase.cs" t="Include" />
           <e p="CompetitionManager.cs" t="Include" />
           <e p="CopyPasteAI.cs" t="Include" />
+          <e p="CubeMovement.cs" t="Include" />
           <e p="Enums.cs" t="Include" />
           <e p="FieldOfView.cs" t="Include" />
           <e p="FieldOfViewEditor.cs" t="Include" />

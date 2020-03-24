@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FieldOfView : MonoBehaviour
 {
+    public UnitController unit = new UnitController();
     public GameObject[] others;
     //public CopyPasteAI otherAI;???
     public float[] otherHealth;
@@ -24,13 +25,17 @@ public class FieldOfView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Calculates angle from self to each target, and normalizes it. (making it between -1 and 1 max)
-        Vector3 a = this.transform.forward;
+         
+
+            //Calculates angle from self to each target, and normalizes it. (making it between -1 and 1 max)
+            Vector3 a = this.transform.forward;
+            
         foreach (GameObject other in others)
+            
         {
             //If it finds itself in the array, skip.
             if (other == this.gameObject) continue;
-            
+
 
             Vector3 b = other.transform.position - this.transform.position;
             float angle = Vector3.SignedAngle(b, a, Vector3.up);
@@ -39,7 +44,8 @@ public class FieldOfView : MonoBehaviour
             //Shoots a raycast to the target if it is in range, in it's field of View and if it has the tag "Target".
             //If you want you can seperate this line into different 'if' statements.
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, b, out hit, visionRange) && Mathf.Abs(angle) < FOV && hit.transform.tag == "Target")
+            if (Physics.Raycast(transform.position, b, out hit, visionRange) && Mathf.Abs(angle) < FOV &&
+                hit.transform.tag == "Target")
             {
                 //======Put what you want to happen if a target is in it's field of view here=======================
 
@@ -54,8 +60,9 @@ public class FieldOfView : MonoBehaviour
             {
                 theTarget = null;
             }
-        } 
-    }
+        }
+    
+}
 
     //Just a calculation thing for the visual stuff
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)

@@ -27,14 +27,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UnitController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BulletBehavior.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
       </list>
     </option>
   </component>
@@ -103,6 +103,7 @@
       <workItem from="1584705143491" duration="1950000" />
       <workItem from="1584708504091" duration="365000" />
       <workItem from="1584879191532" duration="2317000" />
+      <workItem from="1585050784262" duration="9006000" />
     </task>
     <servers />
   </component>

@@ -97,7 +97,7 @@ public class BaseAI : MonoBehaviour
 
     }
 
-    public IEnumerator SetStats(float[] mode, int hp)
+    public IEnumerator SetStats(float[] mode, float hp)
     {
         return Unit.__SetStats(mode, hp);
     }
