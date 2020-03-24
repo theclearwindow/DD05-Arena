@@ -168,11 +168,12 @@ public class CopyPasteAI : BaseAI
 
                 //Scouting
                 yield return DoNothing(1);
-                yield return Ahead(2);
-                yield return LookAtTarget(10);
-                yield return FireFront();//set power in UnitController
-                yield return FollowTarget(2);
-                yield return TurnRight(90);
+                //yield return Ahead(2);
+                //yield return LookAtTarget(10);
+                //yield return FireFront();//set power in UnitController
+                //yield return FollowTarget(2);
+                yield return FireFront();
+                //yield return TurnRight(90);
 
 
                 /*

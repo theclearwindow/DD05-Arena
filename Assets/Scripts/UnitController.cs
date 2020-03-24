@@ -12,7 +12,7 @@ public class UnitController : MonoBehaviour
     public float speed;
     public float damage;
 
-    public GameObject BulletPrefab = null;
+    //public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
     public HealthScript healthScript;
     public StatControl Stats;
@@ -22,7 +22,7 @@ public class UnitController : MonoBehaviour
     //private bool scan = true;
     //==========Shooting stuff===============
     public GameObject Projectile_Emitter;
-    public GameObject Projectile_Default;
+    public GameObject Projectile_Prefab;
 
     public float Projectile_Forward_Force = 600;
     public float fireRateDefault = 0.5f;
@@ -91,6 +91,8 @@ public class UnitController : MonoBehaviour
         seenTarget = GetComponent<FieldOfView>().theTarget;
         navTarget = seenTarget;
         //Debug.Log(seenTarget);
+
+        Debug.DrawRay(transform.position, transform.forward, Color.green, 1.0f);
     }
     public void SetAI(BaseAI _ai)
     {
@@ -110,13 +112,13 @@ public class UnitController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
 
-        Debug.Log("collision detected with " + other.gameObject.name + ", Tag: " + other.gameObject.tag);
+        //Debug.Log("collision detected with " + other.gameObject.name + ", Tag: " + other.gameObject.tag);
         
         if (other.gameObject.tag == "Bullet")
         {
-
             GameObject bul = other.gameObject;
             float mod = bul.GetComponent<BulletBehavior>().power;
+            Debug.Log(mod);
 
             if (mod > defense)
             {
@@ -124,7 +126,7 @@ public class UnitController : MonoBehaviour
 
                 currentHealth -= pow;
                 healthScript.SetHealth(currentHealth);
-                Debug.Log("got shoosted");
+                //Debug.Log("got shoosted");
 
             }
 
@@ -191,6 +193,7 @@ public class UnitController : MonoBehaviour
     {
         int numFrames = (int)(duration / Time.fixedDeltaTime);
         for (int f = 0; f < numFrames; f++)
+        agent.speed = 0.0f;
         {
             yield return new WaitForFixedUpdate();
         }
@@ -206,16 +209,17 @@ public class UnitController : MonoBehaviour
                 Debug.Log("Shoot");
                 if (shotFired == false)
                 {
+                    //Instantiate(Projectile_Prefab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
+                    GameObject projectile;
 
-                    GameObject Projectile_Handler;
-
-                    Projectile_Handler = Instantiate(Projectile_Default, Projectile_Emitter.transform.position, Projectile_Emitter.transform.rotation) as GameObject;
-                    Projectile_Handler.transform.Rotate(Vector3.left * 90);
+                    projectile = Instantiate(Projectile_Prefab, BulletSpawnPoint.position, BulletSpawnPoint.rotation) as GameObject;
+                    projectile.transform.Rotate(Vector3.left * 90);
 
                     Rigidbody Projectile_RigidBody;
-                    Projectile_RigidBody = Projectile_Handler.GetComponent<Rigidbody>();
+                    Projectile_RigidBody = projectile.GetComponent<Rigidbody>();
 
                     Projectile_RigidBody.AddForce(transform.forward * Projectile_Forward_Force);
+                    Debug.DrawRay(BulletSpawnPoint.position, transform.forward, Color.blue, 2);
 
                     shotFired = true;
                     float shotPower = damage * 10;//this is the bullet damage, needs to be read by TakeDamage
@@ -224,7 +228,7 @@ public class UnitController : MonoBehaviour
 
                     //weaponDefault = false;
 
-                    Destroy(Projectile_Handler, 3.0f);
+                    Destroy(projectile, 3.0f);
                 }
             }
         }
