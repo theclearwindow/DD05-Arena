@@ -101,6 +101,12 @@ public class BaseAI : MonoBehaviour
     {
         return Unit.__SetStats(mode, hp);
     }
+
+    public IEnumerator ToHell(int sink)
+    {
+
+        yield return Unit.__ToHell(sink);
+    }
     
     //=============================================================
 }

@@ -14,6 +14,7 @@ public class UnitController : MonoBehaviour
 
     //public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
+    public Transform hellPlane;
     public HealthScript healthScript;
     public StatControl Stats;
     private BaseAI ai = null;
@@ -325,6 +326,19 @@ public class UnitController : MonoBehaviour
         yield return ai.RunAI();    // <<<<<<<this makes the code run from the start again.
         yield return new WaitForFixedUpdate();
 
+    }
+
+    public IEnumerator __ToHell(int sink)
+    {
+        int numFrames = (int)(sink / (baseSpeed * Time.fixedDeltaTime));
+        for (int f = 0; f < numFrames; f++)
+        {
+            transform.Translate(new Vector3( baseSpeed * Time.fixedDeltaTime, 0f, 0f), Space.Self);
+            
+
+            yield return new WaitForFixedUpdate();
+        }
+        
     }
     //=========================================================================
 }
