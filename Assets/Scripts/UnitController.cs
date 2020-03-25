@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class UnitController : MonoBehaviour
 {
@@ -87,6 +88,13 @@ public class UnitController : MonoBehaviour
         //Debug.Log(seenTarget);
     }
 
+    private void OnDestroy()
+    {
+        if (FindObjectOfType<CameraFollow>() != null) {
+        FindObjectOfType<CameraFollow>().others.Remove(this.gameObject);
+        }
+    }
+
     private void Update()
     {
         if (currentHealth > 0)
@@ -138,8 +146,8 @@ public class UnitController : MonoBehaviour
             if (mod > defense)
             {
                 pow = mod - (defense * 10);
-                Debug.Log("pow: " + pow);
-                Debug.Log("currentHealth: " + currentHealth);
+                //Debug.Log("pow: " + pow);
+                //Debug.Log("currentHealth: " + currentHealth);
                 currentHealth -= pow;
                 healthScript.SetHealth(currentHealth/100, MySelf);
                 //Debug.Log("got shoosted");
@@ -225,6 +233,8 @@ public class UnitController : MonoBehaviour
                 Debug.Log("Shoot");
                 if (shotFired == false)
                 {
+                    CameraShaker.Instance.ShakeOnce(0.5f, 4f, 0.2f, 0.2f);//For the camera shake (Magnitude, roughmess, fadein, fadeout)
+
                     //Instantiate(Projectile_Prefab, BulletSpawnPoint.position, BulletSpawnPoint.rotation);
                     GameObject projectile;
 

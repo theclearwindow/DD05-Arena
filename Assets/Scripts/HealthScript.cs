@@ -64,29 +64,24 @@ public class HealthScript : MonoBehaviour
         {
             hp.fillAmount = health;
             health = newHealth;
-            
-            
-        
-            
-
-          
-
         }
         else
         {
             health = 0;
             hp.fillAmount = health;
-            Debug.Log("TO HELL");
+            /* float sunk = (Time.time - startTime) * 3;
+
+             float fractionSunk = sunk / distToHell;
+
+             me.position = Vector3.Lerp(thisGuy.transform.position, hell.position, fractionSunk);*///trying to Lerp
+                                                                                                   // me.position = hell.position;//giving up on Lerp
+                                                                                                   //if (gameObject != null)
+                                                                                                   //{
+                                                                                                   // Do something  
             
-
-               /* float sunk = (Time.time - startTime) * 3;
-
-                float fractionSunk = sunk / distToHell;
-
-                me.position = Vector3.Lerp(thisGuy.transform.position, hell.position, fractionSunk);*///trying to Lerp
-              // me.position = hell.position;//giving up on Lerp
-               Destroy(thisGuy);
-               Instantiate(thisGuy, hell.position, Quaternion.identity);
+            Destroy(thisGuy);
+            //}
+               //Instantiate(thisGuy, hell.position, Quaternion.identity);
 
 
 
@@ -94,10 +89,11 @@ public class HealthScript : MonoBehaviour
         }
 
 
-        Debug.Log("Health: " + health);
+        //Debug.Log("Health: " + health);
        // Debug.Log("fill amount: " + hp.fillAmount);
-
     }
+
+    
 
     public void StatBars(float[] newMode)
     {
