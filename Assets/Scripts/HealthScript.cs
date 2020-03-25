@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class HealthScript : MonoBehaviour
 {
     public float health = 1;
+    public float maxHealth = 1;
     public Transform me;
     public Transform hell;
     public Gradient gradient;
@@ -20,6 +21,13 @@ public class HealthScript : MonoBehaviour
     public Image spd;
     public Image dmg;
     public Slider slider;
+    public Image bFlash;
+    public Image bg;
+    
+    public AnimationCurve hurtyCurve = new AnimationCurve(new Keyframe(0,0), new Keyframe(1,1));
+    
+    public float timer = 1.0f;
+    public float flashtime = 0;
 
     private float startTime;
     //public GameObject player;
@@ -31,6 +39,7 @@ public class HealthScript : MonoBehaviour
 
     private void update()
     {
+        
         
         
         
@@ -47,20 +56,26 @@ public class HealthScript : MonoBehaviour
     {
         me = thisGuy.transform;
         startTime = Time.time;
+        flashtime = 0;
         //hell.position = new Vector3(thisGuy.transform.position.x, -5, thisGuy.transform.position.z);
-        float distToHell = Vector3.Distance(thisGuy.transform.position, hell.position);
+        //float distToHell = Vector3.Distance(thisGuy.transform.position, hell.position);
        
         if (newHealth > 0)
         {
             hp.fillAmount = health;
             health = newHealth;
+            
+            
+        
+            
 
           
 
         }
         else
         {
-            
+            health = 0;
+            hp.fillAmount = health;
             Debug.Log("TO HELL");
             
 
