@@ -15,6 +15,7 @@ public class HealthScript : MonoBehaviour
     public Transform hell;
     public Gradient gradient;
     public BaseAI playerScript;
+    public SoundControl sounds;
     public GameObject player;
     public Image hp;
     public Image def;
@@ -54,7 +55,17 @@ public class HealthScript : MonoBehaviour
 //    }
     public void SetHealth(float newHealth, GameObject thisGuy)
     {
+        
+        
+
+        AudioSource SFX = thisGuy.GetComponent<AudioSource>();
+        if (SFX == null)
+        {
+            Debug.Log("null audio from healthscript");
+        } else Debug.Log(SFX);
+        
         me = thisGuy.transform;
+        
         startTime = Time.time;
         flashtime = 0;
         //hell.position = new Vector3(thisGuy.transform.position.x, -5, thisGuy.transform.position.z);
@@ -62,13 +73,16 @@ public class HealthScript : MonoBehaviour
        
         if (newHealth > 0)
         {
+           // sounds.PlayerSound(thisGuy, 2);
             hp.fillAmount = health;
             health = newHealth;
+            
         }
         else
         {
             health = 0;
             hp.fillAmount = health;
+           // sounds.PlayerSound( 3);
             /* float sunk = (Time.time - startTime) * 3;
 
              float fractionSunk = sunk / distToHell;

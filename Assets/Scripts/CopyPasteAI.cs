@@ -16,7 +16,7 @@ public class CopyPasteAI : BaseAI
 
     public bool on;
 
-    //This 2D Array contains your different modes. 
+    //This 2D Array contains your different modes. *outdated, see arrays below
     private float[,] modes = new float[,]
     {
         /*offensive*/{.2f, .2f, .6f}, 
@@ -35,10 +35,7 @@ public class CopyPasteAI : BaseAI
 
 
 
-    public HealthScript healthBar;
-    public HealthScript defBar;
-    public HealthScript speedBar;
-    public HealthScript damBar;
+    private SoundControl sounds;
 
     void Start()
     {
@@ -57,6 +54,8 @@ public class CopyPasteAI : BaseAI
         
         if (currentHealth < GetStats())
         {
+            
+            
             HealthChange();
             currentHealth = GetStats();
         } else HealthChange();
@@ -123,7 +122,7 @@ public class CopyPasteAI : BaseAI
 
                         if (GetStats() <= .7f && GetStats() > .4f)
                         {
-                            Debug.Log("Defensive");
+                            //Debug.Log("Defensive");
                             
                             
                                 changeMode = defensive;
@@ -133,13 +132,13 @@ public class CopyPasteAI : BaseAI
                         }
                         else if (GetStats() <= .4f)
                         {
-                            Debug.Log("Retreat");
+                            //Debug.Log("Retreat");
                             changeMode = retreat;
                             //yield return SetStats(currentMode, healthMod);
                         }
                         else
                         {
-                            Debug.Log("default(offensive)");
+                           // Debug.Log("default(offensive)");
                             // Debug.Log(GetStats());
                             changeMode = offensive;
 

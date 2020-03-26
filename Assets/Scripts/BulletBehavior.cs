@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class BulletBehavior : MonoBehaviour
 {
+    private SoundControl sound;
 
     public int power;
     //public float speed = 5;
@@ -12,6 +13,7 @@ public class BulletBehavior : MonoBehaviour
 
     private void Start()
     {
+        //sound.PlayerSound(1);
 
         //set power equal to 10 * the mod of the AI who fired it
         //for now bullet power is unaffected by damage

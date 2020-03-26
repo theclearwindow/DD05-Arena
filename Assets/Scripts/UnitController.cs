@@ -13,6 +13,7 @@ public class UnitController : MonoBehaviour
     public float speed;
     public float damage;
 
+    public SoundControl sounds;
     //public GameObject BulletPrefab = null;
     public Transform BulletSpawnPoint = null;
     public Transform hellPlane;
@@ -93,6 +94,7 @@ public class UnitController : MonoBehaviour
         if (FindObjectOfType<CameraFollow>() != null) {
         FindObjectOfType<CameraFollow>().others.Remove(this.gameObject);
         }
+        
     }
 
     private void Update()
@@ -228,9 +230,10 @@ public class UnitController : MonoBehaviour
 
         if (weaponDefault == true)
         {
+            
             if (timer > fireRateDefault)
             {
-                Debug.Log("Shoot");
+                //Debug.Log("Shoot");
                 if (shotFired == false)
                 {
                     CameraShaker.Instance.ShakeOnce(0.5f, 4f, 0.2f, 0.2f);//For the camera shake (Magnitude, roughmess, fadein, fadeout)
@@ -320,8 +323,8 @@ public class UnitController : MonoBehaviour
     {
         currentHealth -= dmg;
         healthScript.SetHealth(currentHealth, MySelf);
-        
 
+        
         yield return currentHealth;
 
     }
