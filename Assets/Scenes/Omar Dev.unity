@@ -121,6 +121,65 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 7d22599f1b1308648b288403c09c143e, type: 2}
+--- !u!1 &277845455 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7846839961345976837, guid: c407cadfc8eabea4e9ceafb1f42939ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 746102321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &277845456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277845455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3db8586f243403f4d9622f51af5beaa4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  defense: 0
+  speed: 0
+  damage: 0
+  BulletPrefab: {fileID: 0}
+  BulletSpawnPoint: {fileID: 0}
+  healthScript: {fileID: 0}
+  Stats: {fileID: 0}
+  Projectile_Emitter: {fileID: 0}
+  Projectile_Default: {fileID: 0}
+  Projectile_Forward_Force: 600
+  fireRateDefault: 0.5
+  navTarget: {fileID: 0}
+  agent: {fileID: 0}
+  _AItype: 0
+--- !u!114 &277845462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 277845455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adbec2d663ce5c5499443e6d1e618463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Unit: {fileID: 0}
+  currentHealth: 0
+  defense: 0
+  speed: 0
+  damage: 0
+  on: 0
+  newPos: 0
+  nowPos: 0
+  set: []
+  healthBar: {fileID: 0}
+  defBar: {fileID: 0}
+  speedBar: {fileID: 0}
+  damBar: {fileID: 0}
 --- !u!1001 &746102321
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,6 +187,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 245685399, guid: c407cadfc8eabea4e9ceafb1f42939ea, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1304025640506019854, guid: c407cadfc8eabea4e9ceafb1f42939ea,
+        type: 3}
+      propertyPath: FOV
+      value: 33
+      objectReference: {fileID: 0}
     - target: {fileID: 2812182665975217559, guid: c407cadfc8eabea4e9ceafb1f42939ea,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,6 +260,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846839961345976837, guid: c407cadfc8eabea4e9ceafb1f42939ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c407cadfc8eabea4e9ceafb1f42939ea, type: 3}
@@ -262,7 +335,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5c7676cc80e1b6439f8c13e21fc1e6d, type: 2}
+  - {fileID: 2100000, guid: 2acb27deae449e84ea16ba8d689e9ac0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -404,6 +477,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 245685399, guid: c407cadfc8eabea4e9ceafb1f42939ea, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1304025640506019854, guid: c407cadfc8eabea4e9ceafb1f42939ea,
         type: 3}
       propertyPath: FOV
@@ -473,6 +550,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7846839961345976837, guid: c407cadfc8eabea4e9ceafb1f42939ea,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c407cadfc8eabea4e9ceafb1f42939ea, type: 3}
@@ -566,6 +648,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 521764900593896247, guid: 90d569a464f41f246b96d05b19b8b541,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 39baa70996e50384d9e5921ed2277d47, type: 2}
     - target: {fileID: 8471931544652921272, guid: 90d569a464f41f246b96d05b19b8b541,
         type: 3}
       propertyPath: m_LocalPosition.x
