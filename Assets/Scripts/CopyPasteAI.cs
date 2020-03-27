@@ -8,7 +8,7 @@ public class CopyPasteAI : BaseAI
     
     //See MaxAI for most current work from Max
     
-    public int currentHealth;
+    public float currentHealth;
     public float defense;
     public float speed;
     public float damage;
@@ -16,7 +16,7 @@ public class CopyPasteAI : BaseAI
 
     public bool on;
 
-    //This 2D Array contains your different modes. 
+    //This 2D Array contains your different modes. *outdated, see arrays below
     private float[,] modes = new float[,]
     {
         /*offensive*/{.2f, .2f, .6f}, 
@@ -35,10 +35,7 @@ public class CopyPasteAI : BaseAI
 
 
 
-    public HealthScript healthBar;
-    public HealthScript defBar;
-    public HealthScript speedBar;
-    public HealthScript damBar;
+    private SoundControl sounds;
 
     void Start()
     {
@@ -47,131 +44,58 @@ public class CopyPasteAI : BaseAI
 
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
 
-        set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
+        //set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
 
     }
 
     void Update()
     {
+        
+        
+        if (currentHealth < GetStats())
+        {
+            
+            
+            HealthChange();
+            currentHealth = GetStats();
+        } else HealthChange();
 
-        currentHealth = Unit.currentHealth;
-        /*
-                if (nowPos != newPos)//if mode has changed
-                {
-                    set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] };//change current mode values
-        
-        
-                    Stats.SetNewMode(set);//apply current mode values
-                    healthBar.StatBars(set);//set statbar values
-        
-                    //apply current values to unit:
-                    defense = Stats.HP;
-                    speed = Stats.SPD;
-                    damage = Stats.DMG;
-                    Debug.Log("defense: " + defense);
-                    Debug.Log("damage: " + damage);
-                    Debug.Log("speed: " + speed);
-                    nowPos = newPos;//update nowPos to stop program from crashing
-        
-                }
-                if (Input.GetKeyDown(KeyCode.F))
-                {
-                    TakeDamage(20);//hurt me, daddy
-                }
-        
-                if (Input.GetKeyDown(KeyCode.T))
-                {
-                    //SetDefensive();
-                }
-        
-                if (Input.GetKeyDown(KeyCode.Y))
-                {
-                    //SetOffesive();
-                }
-        
-                if (Input.GetKeyDown(KeyCode.U))
-                {
-                    //SetRetreat();
-                }
-        
-                if (on == true)//check if unit is alive
-                {
-        
-                    if (currentHealth / 100 < 0.5f)//check health
-                    {
-        
-        
-                        newPos = 0; //change mode based on health
-                        //StartCoroutine(UnderHalf());
-                    }
-        
-                    if (currentHealth / 100 < .3f)
-                    {
-                        newPos = 2;
-                    }
-        
-        
-                }
-        
-                if (currentHealth / 100 <= 0.0f)
-                {
-                    on = false;
-                    //die?
-                }
-            }
-        
-            void TakeDamage(int damage)
-            {
-                currentHealth -= damage;
-        
-                healthBar.SetHealth(currentHealth);
-        
-            }/*
-        
-            /*
-            IEnumerator OverHalf()
-            {
-        
-        
-                if (currentHealth / 100 > 0.5f)
-                {
-                    yield return FireFront(1);
-                }
-                else
-                {
-        
-                }
-                if (currentHealth / 100 <= 0.0f)
-                {
-                    Debug.Log("Dead");
-                }
-            }
-        
-            IEnumerator UnderHalf()
-            {//what if no coroutines? just at first?
-                yield return Ahead(2);
-                yield return FireFront(1);
-                yield return TurnLeft(360);
-                yield return Back(4);
-                yield return TurnRight(90);
-            }
-            */
-    }//this needs to be removed if the above comments are undone
+    }
+
+    bool HealthChange()
+    {
+
+        bool itDid = false;
+
+        if (currentHealth < GetStats())
+        {
+
+            //currentHealth = GetStats();
+            itDid = true;
+        }
+
+        return itDid;
+    }
 
 
     public override IEnumerator RunAI()
     {
-        Debug.Log("CopyPasteAI RunAI started");
+//        Debug.Log("CopyPasteAI RunAI started");
         while (true)
         {
-            {
+            float healthMod = currentHealth / 100;
+            float[] currentMode = {1,1,1};
+            float[] changeMode = offensive;//start with default mode
+            
 
                 //Scouting
-                yield return DoNothing(1);
-                yield return Ahead(2);
-                yield return LookAtTarget(10);
-                yield return FollowTarget(2);
-                yield return TurnRight(90);
+            yield return DoNothing(1);
+                //yield return Ahead(2);
+                //yield return LookAtTarget(10);
+                //yield return FireFront();//set power in UnitController
+                //yield return FollowTarget(2);
+            yield return FireFront();
+                //yield return TurnRight(90);
 
 
                 /*
@@ -190,7 +114,50 @@ public class CopyPasteAI : BaseAI
                 //yield return FollowTarget(2);
                 yield return TurnRight(90);
                 */
-            }
+                if (HealthChange())
+                {
+                    
+                    
+
+
+                        if (GetStats() <= .7f && GetStats() > .4f)
+                        {
+                            //Debug.Log("Defensive");
+                            
+                            
+                                changeMode = defensive;
+                            
+
+                            //yield return SetStats(currentMode, healthMod);
+                        }
+                        else if (GetStats() <= .4f)
+                        {
+                            //Debug.Log("Retreat");
+                            changeMode = retreat;
+                            //yield return SetStats(currentMode, healthMod);
+                        }
+                        else
+                        {
+                           // Debug.Log("default(offensive)");
+                            // Debug.Log(GetStats());
+                            changeMode = offensive;
+
+                            //default mode
+                        }
+
+                        if(currentMode != changeMode)
+                        {
+                            currentMode = changeMode;
+                            yield return SetStats(currentMode, healthMod);
+                        }
+                    
+
+
+                }
+
+                
         }
     }
 }
+    
+

@@ -7,11 +7,24 @@
       <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="PatrolScenePrefabs" t="Include">
-          <e p="Billboard.cs" t="Include" />
-          <e p="HealthScriptt.cs" t="Include" />
+        <e p="EZ Camera Shake" t="Include">
+          <e p="Scripts" t="Include">
+            <e p="CameraShakeInstance.cs" t="Include" />
+            <e p="CameraShakePresets.cs" t="Include" />
+            <e p="CameraShaker.cs" t="Include" />
+            <e p="Utilities" t="Include">
+              <e p="CameraUtilities.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="MapAndPatrol" t="Include">
           <e p="Patrol.cs" t="Include" />
-          <e p="PlayerScript.cs" t="Include" />
+          <e p="SimpleCameraController.cs" t="Include" />
+          <e p="SimpleFX" t="Include">
+            <e p="Materials" t="Include">
+              <e p="UnlitVertexColour_Alpha.shader" t="Include" />
+            </e>
+          </e>
         </e>
         <e p="RobotSphere" t="Include">
           <e p="Assets" t="Include">
@@ -26,14 +39,17 @@
         <e p="Scripts" t="Include">
           <e p="BaseAI.cs" t="Include" />
           <e p="BulletBehavior.cs" t="Include" />
+          <e p="CameraFollow.cs" t="Include" />
           <e p="Chase.cs" t="Include" />
           <e p="CompetitionManager.cs" t="Include" />
           <e p="CopyPasteAI.cs" t="Include" />
+          <e p="CubeMovement.cs" t="Include" />
           <e p="Enums.cs" t="Include" />
           <e p="FieldOfView.cs" t="Include" />
           <e p="FieldOfViewEditor.cs" t="Include" />
           <e p="HealthScript.cs" t="Include" />
           <e p="MaxAI.cs" t="Include" />
+          <e p="SoundControl.cs" t="Include" />
           <e p="StatControl.cs" t="Include" />
           <e p="UnitController.cs" t="Include" />
           <e p="Weapons.cs" t="Include" />

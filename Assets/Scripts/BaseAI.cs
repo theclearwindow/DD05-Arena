@@ -47,9 +47,9 @@ public class BaseAI : MonoBehaviour
         yield return Unit.__DoNothing(duration);
     }
 
-    public IEnumerator FireFront(float power)
+    public IEnumerator FireFront()
     {
-        yield return Unit.__FireFront(power);
+        yield return Unit.__FireFront();
     }
 
     public IEnumerator TakeDamage(int power)
@@ -97,9 +97,15 @@ public class BaseAI : MonoBehaviour
 
     }
 
-    public IEnumerator SetStats(float[] mode, int hp)
+    public IEnumerator SetStats(float[] mode, float hp)
     {
         return Unit.__SetStats(mode, hp);
+    }
+
+    public IEnumerator ToHell(int sink)
+    {
+
+        yield return Unit.__ToHell(sink);
     }
     
     //=============================================================

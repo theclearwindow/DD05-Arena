@@ -20,6 +20,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/SoundControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/StatControl.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CompetitionManager.cs" root0="FORCE_HIGHLIGHTING" />
@@ -27,14 +28,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/StatControl.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/FieldOfView.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BaseAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/BulletBehavior.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/CopyPasteAI.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/MaxAI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UnitController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SoundControl.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/HealthScript.cs" />
       </list>
     </option>
   </component>
@@ -51,6 +53,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -99,6 +102,13 @@
       <workItem from="1584197332172" duration="4198000" />
       <workItem from="1584344796628" duration="5280000" />
       <workItem from="1584449838436" duration="8397000" />
+      <workItem from="1584613161299" duration="2081000" />
+      <workItem from="1584705143491" duration="1950000" />
+      <workItem from="1584708504091" duration="365000" />
+      <workItem from="1584879191532" duration="2317000" />
+      <workItem from="1585050784262" duration="9006000" />
+      <workItem from="1585126261700" duration="8116000" />
+      <workItem from="1585225189062" duration="9806000" />
     </task>
     <servers />
   </component>
