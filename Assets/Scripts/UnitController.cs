@@ -60,22 +60,22 @@ public class UnitController : MonoBehaviour
         }
         else if (_AItype == AItype.Omar)
         {
-            SetAI(new CopyPasteAI());
+            SetAI(new SomemoneAI1());
             StartBattle();
         }
         else if (_AItype == AItype.Michael)
         {
-            SetAI(new MaxAI());
+            SetAI(new SomemoneAI1());
             StartBattle();
         }
         else if (_AItype == AItype.Sofie)
         {
-            SetAI(new MaxAI());
+            SetAI(new SomemoneAI1());
             StartBattle();
         }
         else if (_AItype == AItype.Theo)
         {
-            SetAI(new MaxAI());
+            SetAI(new SomemoneAI1());
             StartBattle();
         }
         else
@@ -91,8 +91,10 @@ public class UnitController : MonoBehaviour
 
     private void OnDestroy()
     {
+        //Make camera switch on death.
         if (FindObjectOfType<CameraFollow>() != null) {
-        FindObjectOfType<CameraFollow>().others.Remove(this.gameObject);
+            FindObjectOfType<CameraFollow>().selection--;
+            FindObjectOfType<CameraFollow>().others.Remove(this.gameObject);
         }
         
     }

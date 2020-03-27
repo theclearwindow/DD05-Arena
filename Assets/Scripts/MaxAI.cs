@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class MaxAI : BaseAI
 {
-    //public int maxHealth = 100;
+
+    //See MaxAI for most current work from Max
+
     public float currentHealth;
     public float defense;
     public float speed;
@@ -13,13 +16,17 @@ public class MaxAI : BaseAI
 
     public bool on;
 
-    //This 2D Array contains your different modes. 
+    //This 2D Array contains your different modes. *outdated, see arrays below
     private float[,] modes = new float[,]
     {
         /*offensive*/{.2f, .2f, .6f}, 
         /*defensive*/{.6f,.2f,.2f}, 
         /*Retreat*/{.2f,.6f,.2f}
     };
+
+    private float[] offensive = { .2f, .2f, .6f };
+    private float[] defensive = { .6f, .2f, .2f };
+    private float[] retreat = { .2f, .6f, .2f };
 
     public int newPos = 0;//new position in the array, counting down from the top.
     public int nowPos = 0;//current position in the array, to keep the mode from updating every frame
@@ -28,150 +35,115 @@ public class MaxAI : BaseAI
 
 
 
-    public HealthScript healthBar;
-    public HealthScript defBar;
-    public HealthScript speedBar;
-    public HealthScript damBar;
+    private SoundControl sounds;
 
     void Start()
     {
         on = true;//is AI on or alive -- possibly unnecessary
         currentHealth = 100;
-        //healthBar.SetHealth(currentHealth);
 
         newPos = 1;//set starting mode -- make sure this is different than "nowPos" starting variable or the mode won't set
 
-        set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
+        //set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] }; //set values for beginning mode
 
     }
+
     void Update()
     {
-        currentHealth = Unit.currentHealth;
-        if (nowPos != newPos)//if mode has changed
-        {
-            set = new float[] { modes[newPos, 0], modes[newPos, 1], modes[newPos, 2] };//change current mode values
 
 
-           // Stats.SetNewMode(set);//apply current mode values
-            healthBar.StatBars(set);//set statbar values
-
-            //apply current values to unit:
-           /* defense = Stats.HP;
-            speed = Stats.SPD;
-            damage = Stats.DMG;
-            Debug.Log("defense: " + defense);
-            Debug.Log("damage: " + damage);
-            Debug.Log("speed: " + speed);
-            nowPos = newPos;//update nowPos to stop program from crashing
-*/
-        }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            //thia function is currently called by a button press, but it will be able to be called by bullets on collision
-           
-            
-            //Stats.SetHealth(Damage(20));
-        }
-
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            //SetDefensive();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            //SetOffesive();
-        }
-
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            //SetRetreat();
-        }
-
-        if (on == true)//check if unit is alive
+        if (currentHealth < GetStats())
         {
 
-            if (currentHealth / 100 < 0.5f)//check health
-            {
 
-
-                newPos = 0; //change mode based on health
-                //StartCoroutine(UnderHalf());
-            }
-
-            if (currentHealth / 100 < .3f)
-            {
-                newPos = 2;
-            }
-
-
+            HealthChange();
+            currentHealth = GetStats();
         }
+        else HealthChange();
 
-        if (currentHealth / 100 <= 0.0f)
-        {
-            on = false;
-            //die?
-        }
     }
-    
-    //Max's recent enumerators, etc.
-    //========================================================================================
-//putting the damage enumerator in the player's AI itself. Good idea? Bad Idea? Does it work?
-    
-    //=========================================================================================
 
-    /*
-    IEnumerator OverHalf()
+    bool HealthChange()
     {
 
+        bool itDid = false;
 
-        if (currentHealth / 100 > 0.5f)
-        {
-            yield return FireFront(1);
-        }
-        else
+        if (currentHealth < GetStats())
         {
 
+            //currentHealth = GetStats();
+            itDid = true;
         }
-        if (currentHealth / 100 <= 0.0f)
-        {
-            Debug.Log("Dead");
-        }
+
+        return itDid;
     }
-
-    IEnumerator UnderHalf()
-    {//what if no coroutines? just at first?
-        yield return Ahead(2);
-        yield return FireFront(1);
-        yield return TurnLeft(360);
-        yield return Back(4);
-        yield return TurnRight(90);
-    }
-    */
 
 
     public override IEnumerator RunAI()
     {
-       // Debug.Log("MaxAI RunAI started");
+        //        Debug.Log("CopyPasteAI RunAI started");
         while (true)
         {
-            if (GetStats() < 0.5f)
+            float healthMod = currentHealth / 100;
+            float[] currentMode = { 1, 1, 1 };
+            float[] changeMode = offensive;//start with default mode
+
+
+            yield return Ahead(5);
+            yield return FollowTarget(1);
+            yield return FireFront();
+            yield return FollowTarget(0.3f);
+            yield return FireFront();
+            yield return FollowTarget(0.3f);
+            yield return FireFront();
+            yield return TurnLeft(180);
+            yield return FollowTarget(0.3f);
+            yield return FireFront();
+            yield return TurnRight(90);
+
+
+            if (HealthChange())
             {
-                //yield return Ahead(8);
-                //yield return FollowTarget(1);
-                //yield return TurnLeft(160);
-                yield return Ahead(8);
-                yield return FireFront();
-                //yield return FireFront(1);
-               // yield return TurnLeft(360);
-                yield return Back(8);
-                yield return FireFront();
-                //yield return TurnRight(90);
+
+
+
+
+                if (GetStats() <= .7f && GetStats() > .4f)
+                {
+                    //Debug.Log("Defensive");
+
+
+                    changeMode = defensive;
+
+
+                    //yield return SetStats(currentMode, healthMod);
+                }
+                else if (GetStats() <= .4f)
+                {
+                    //Debug.Log("Retreat");
+                    changeMode = retreat;
+                    //yield return SetStats(currentMode, healthMod);
+                }
+                else
+                {
+                    // Debug.Log("default(offensive)");
+                    // Debug.Log(GetStats());
+                    changeMode = offensive;
+
+                    //default mode
+                }
+
+                if (currentMode != changeMode)
+                {
+                    currentMode = changeMode;
+                    yield return SetStats(currentMode, healthMod);
+                }
+
+
+
             }
-            else
-            {
-                yield return TurnRight(90);
-            }
+
+
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class CopyPasteAI : BaseAI
+public class SomemoneAI1 : BaseAI
 {
     
     //See MaxAI for most current work from Max
@@ -89,21 +89,17 @@ public class CopyPasteAI : BaseAI
 
 
             //Scouting
-            yield return TurnRight(20);
-            yield return Ahead(7);
-            yield return FollowTarget(1f);
-            yield return FireFront();
-            yield return FollowTarget(0.5f);
-            yield return FireFront();
-            yield return FollowTarget(0.5f);
-            yield return FireFront();
-            yield return FollowTarget(0.5f);
-            yield return FireFront();
             yield return Ahead(3);
-            yield return TurnLeft(180);
-            yield return TurnRight(90);
-            yield return FollowTarget(1f);
+            yield return FollowTarget(1);
             yield return FireFront();
+            yield return TurnRight(90);
+            yield return FollowTarget(1);
+            yield return FireFront();
+            yield return TurnLeft(180);
+            yield return FollowTarget(1);
+            yield return FireFront();
+            yield return Ahead(2);
+
 
             if (HealthChange())
                 {

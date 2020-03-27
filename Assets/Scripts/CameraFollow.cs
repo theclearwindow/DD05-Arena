@@ -44,17 +44,7 @@ public class CameraFollow : MonoBehaviour
             timer = 0;
         }
 
-        //if a player dies while the camera is on it.
-        if (others[selection] == null)
-        {
-            others.RemoveAt(selection);
-            if (selection == others.Count)
-            {
-                selection--;
-                offset = new Vector3(Random.Range(-15, 15), Random.Range(8, 20), Random.Range(-15, 15));
-            }
-            timer = 0;
-        }
+        //Debug.Log("Selection: " + selection + "               length: " + others.Count);
 
         //For player control.
         if (Input.GetKeyDown(KeyCode.LeftArrow))
